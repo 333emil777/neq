@@ -1,0 +1,293 @@
+/* ========================================================
+   ESTILOS PANTALLA FINISH - NEQUI (OPTIMIZADO MÓVIL Y DESKTOP)
+   ======================================================== */
+
+:root {
+  --purple-primary: #200020;
+  --pink-primary: #da0081;
+  --pink-hover: #c20073;
+  --border-light: #f0f0f0;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background-color: #ffffff;
+  color: var(--purple-primary);
+  font-family: 'Manrope', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  overflow-x: hidden;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Cabecera limpia con logo Nequi centrado */
+.finish-header {
+  width: 100%;
+  height: 60px;
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  flex-shrink: 0;
+}
+
+.finish-logo {
+  height: 26px;
+  width: auto;
+  display: block;
+}
+
+/* Contenedor principal centrado */
+.finish-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 20px 48px 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.finish-wrapper {
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Icono triste circular con borde punteado */
+.finish-icon-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.finish-icon {
+  width: 76px;
+  height: 77px;
+  display: block;
+}
+
+/* Título */
+.finish-title {
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.3;
+  color: var(--purple-primary);
+  text-align: center;
+  margin-bottom: 14px;
+  letter-spacing: -0.2px;
+}
+
+/* Enunciado de monto solicitado */
+.statement-msg {
+  font-size: 13.5px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--purple-primary);
+  text-align: center;
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.statement-msg span#amount {
+  font-weight: 700;
+  color: var(--purple-primary);
+}
+
+/* Bloque de motivos */
+.reasons-box {
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 20px;
+  padding: 0 4px;
+  box-sizing: border-box;
+}
+
+.reasons-lead {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--purple-primary);
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.reasons-list {
+  list-style-type: disc;
+  padding-left: 20px;
+  margin: 0;
+  text-align: left;
+}
+
+.reasons-list li {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--purple-primary);
+  line-height: 1.45;
+  margin-bottom: 8px;
+}
+
+.reasons-list li:last-child {
+  margin-bottom: 0;
+}
+
+/* Mensaje de ánimo */
+.encouragement-msg {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--purple-primary);
+  text-align: center;
+  line-height: 1.5;
+  margin-bottom: 24px;
+  width: 100%;
+  max-width: 400px;
+  padding: 0 4px;
+}
+
+/* Botón Regresar */
+.btn-return-wrap {
+  width: 100%;
+  max-width: 400px;
+}
+
+.btn-return {
+  width: 100%;
+  min-height: 48px;
+  background-color: var(--pink-primary);
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 13px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  user-select: none;
+  touch-action: manipulation;
+}
+
+.btn-return:hover {
+  background-color: var(--pink-hover);
+}
+
+.btn-return:active {
+  transform: scale(0.98);
+  background-color: var(--pink-hover);
+}
+
+/* ========================================================
+   ADAPTACIONES MÓVILES ESPECÍFICAS
+   ======================================================== */
+@media (max-width: 480px) {
+  .finish-header {
+    height: 54px;
+  }
+
+  .finish-logo {
+    height: 24px;
+  }
+
+  .finish-main {
+    padding: 24px 18px 40px 18px;
+    justify-content: flex-start;
+  }
+
+  .finish-icon-wrap {
+    margin-bottom: 16px;
+  }
+
+  .finish-icon {
+    width: 68px;
+    height: 69px;
+  }
+
+  .finish-title {
+    font-size: 19px;
+    margin-bottom: 12px;
+  }
+
+  .statement-msg {
+    font-size: 13px;
+    line-height: 1.45;
+    margin-bottom: 18px;
+  }
+
+  .reasons-box {
+    margin-bottom: 18px;
+    padding: 0 2px;
+  }
+
+  .reasons-lead {
+    font-size: 13px;
+    margin-bottom: 8px;
+  }
+
+  .reasons-list {
+    padding-left: 18px;
+  }
+
+  .reasons-list li {
+    font-size: 12.5px;
+    margin-bottom: 7px;
+    line-height: 1.4;
+  }
+
+  .encouragement-msg {
+    font-size: 12.5px;
+    line-height: 1.45;
+    margin-bottom: 22px;
+  }
+
+  .btn-return {
+    min-height: 46px;
+    font-size: 15px;
+    padding: 12px 18px;
+  }
+}
+
+/* Pantallas muy pequeñas (iPhone SE, 320px - 360px) */
+@media (max-width: 360px) {
+  .finish-main {
+    padding: 18px 14px 32px 14px;
+  }
+
+  .finish-title {
+    font-size: 18px;
+  }
+
+  .finish-icon {
+    width: 62px;
+    height: 63px;
+  }
+
+  .statement-msg,
+  .reasons-lead,
+  .reasons-list li,
+  .encouragement-msg {
+    font-size: 12px;
+  }
+}

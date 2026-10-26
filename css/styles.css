@@ -1,0 +1,1151 @@
+/* ==========================================================================
+   NEQUI COLOMBIA - Sistema de Diseño Oficial (Landing & Solicitud de Crédito)
+   ========================================================================== */
+
+:root {
+  --nequi-pink: #da0081;
+  --nequi-pink-dark: #b8006d;
+  --nequi-purple: #200020;
+  --ultraviolet: #931cd9;
+  --gray-bg: #f8f8f9;
+  --gray-border: #e2e4e8;
+  --text-dark: #200020;
+  --text-muted: #555555;
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --font-main: 'Plus Jakarta Sans', 'Manrope', -apple-system, sans-serif;
+  --font-display: 'Montserrat', sans-serif;
+}
+
+/* Reset Global & Tipografía */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #ffffff;
+  color: var(--nequi-purple);
+  font-family: var(--font-main);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+/* ==========================================================================
+   1. Header de Navegación Oficial Nequi
+   ========================================================================== */
+.site-header {
+  width: 100%;
+  background-color: #ffffff;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid #f2f2f4;
+}
+
+.header-container {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 14px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-link {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+.nequi-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-dot {
+  width: 9px;
+  height: 9px;
+  background-color: var(--nequi-pink);
+  border-radius: 2px;
+}
+
+.logo-text {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--nequi-purple);
+  letter-spacing: -0.6px;
+  line-height: 1;
+}
+
+/* Menú hamburguesa */
+.menu-toggle {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 38px;
+  height: 38px;
+  gap: 5px;
+  padding: 6px;
+  border-radius: var(--radius-sm);
+  transition: background-color 0.2s ease;
+}
+
+.menu-toggle:hover {
+  background-color: #f7f7f8;
+}
+
+.menu-bar {
+  display: block;
+  width: 24px;
+  height: 2.2px;
+  background-color: var(--nequi-purple);
+  border-radius: 2px;
+  transition: all 0.25s ease;
+}
+
+/* Drawer móvil */
+.mobile-nav {
+  max-height: 0;
+  overflow: hidden;
+  background-color: #ffffff;
+  border-bottom: 1px solid transparent;
+  transition: max-height 0.35s ease, border-color 0.35s ease;
+}
+
+.mobile-nav.open {
+  max-height: 240px;
+  border-color: #e5e7eb;
+}
+
+.mobile-nav ul {
+  list-style: none;
+  padding: 12px 24px 20px;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.mobile-nav li {
+  padding: 10px 0;
+  border-bottom: 1px solid #f6f6f6;
+}
+
+.mobile-nav li:last-child {
+  border-bottom: none;
+}
+
+.mobile-nav a {
+  text-decoration: none;
+  color: var(--nequi-purple);
+  font-size: 15px;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.mobile-nav a:hover {
+  color: var(--nequi-pink);
+}
+
+/* ==========================================================================
+   2. Contenedor Principal
+   ========================================================================== */
+.main-content {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1 0 auto;
+}
+
+/* ==========================================================================
+   3. Banner Hero con questions.jpeg
+   ========================================================================== */
+.hero-banner-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  background: #ffffff;
+}
+
+.hero-banner-wrapper {
+  width: 100%;
+  max-width: 480px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-image-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  background: #ffffff;
+}
+
+.hero-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.hero-overlay-text {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  width: calc(100% - 40px);
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  z-index: 10;
+  pointer-events: none;
+  text-align: left;
+}
+
+.u-text-white {
+  color: #ffffff !important;
+}
+
+.u-text-white.is-credit-effect-page,
+.is-credit-effect-page {
+  font-family: var(--font-display) !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.035em !important;
+  line-height: 1.05 !important;
+  text-align: left !important;
+  color: #ffffff !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  font-size: clamp(32px, 8.8vw, 42px) !important;
+  -webkit-text-stroke-width: 0.5px;
+  -webkit-text-stroke-color: rgba(255, 255, 255, 0.4);
+  text-shadow: 
+    0 1px 20px #931cd9, 
+    0 1px 20px var(--ultraviolet), 
+    0 -2px 10px var(--ultraviolet), 
+    0 -2px 20px var(--ultraviolet) !important;
+  display: block !important;
+  user-select: none;
+  box-sizing: border-box;
+}
+
+/* ==========================================================================
+   4. Formulario de Datos Personales (Cédula)
+   ========================================================================== */
+.form-section {
+  width: 100%;
+  max-width: 480px;
+  margin: 26px auto 0;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+.form-title {
+  color: var(--nequi-pink);
+  font-family: var(--font-main);
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 22px;
+  letter-spacing: -0.3px;
+}
+
+.credit-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Input Wrapper con label flotante e icono */
+.input-field-wrapper {
+  width: 100%;
+  height: 60px;
+  border: 1.5px solid #d4d7dc;
+  border-radius: var(--radius-sm);
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  position: relative;
+  box-sizing: border-box;
+  cursor: text;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input-field-wrapper:hover {
+  border-color: #a8adb6;
+}
+
+.input-field-wrapper.is-focused {
+  border-color: var(--nequi-pink);
+  box-shadow: 0 0 0 3px rgba(218, 0, 129, 0.12);
+}
+
+.input-field-wrapper.error {
+  border-color: #ef4444;
+  animation: shake 0.4s ease;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+
+.id-card-icon {
+  width: 24px;
+  height: 24px;
+  color: var(--nequi-purple);
+  margin-right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.id-card-icon svg {
+  width: 100%;
+  height: 100%;
+  stroke-width: 1.8;
+}
+
+.input-content-stack {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+}
+
+.floating-label {
+  font-family: var(--font-main);
+  font-size: 15px;
+  font-weight: 400;
+  color: #666666;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  pointer-events: none;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  line-height: 1;
+}
+
+.input-field-wrapper.is-focused .floating-label,
+.input-field-wrapper.has-value .floating-label {
+  top: 6px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--nequi-pink);
+}
+
+.cedula-input {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--nequi-purple);
+  font-family: var(--font-main);
+  padding: 16px 0 2px 0;
+  margin: 0;
+}
+
+/* Disclaimer debajo del input */
+.form-disclaimer {
+  margin: 22px 0 24px 0;
+  font-size: 13.5px;
+  font-weight: 400;
+  color: var(--text-muted);
+  line-height: 1.45;
+  max-width: 380px;
+  text-align: center;
+}
+
+.form-disclaimer .highlight {
+  color: var(--nequi-pink);
+  font-weight: 700;
+}
+
+/* Botón Solicitar */
+.submit-btn {
+  width: 100%;
+  height: 52px;
+  background-color: var(--nequi-pink);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 16px;
+  font-weight: 700;
+  font-family: var(--font-main);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 14px rgba(218, 0, 129, 0.28);
+}
+
+.submit-btn:hover {
+  background-color: var(--nequi-pink-dark);
+  box-shadow: 0 6px 18px rgba(218, 0, 129, 0.38);
+}
+
+.submit-btn:active {
+  transform: scale(0.985);
+}
+
+.btn-loader {
+  display: none;
+  width: 22px;
+  height: 22px;
+  border: 2.5px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: btnSpin 0.7s linear infinite;
+}
+
+.submit-btn.loading .btn-text {
+  display: none;
+}
+
+.submit-btn.loading .btn-loader {
+  display: block;
+}
+
+@keyframes btnSpin {
+  to { transform: rotate(360deg); }
+}
+
+/* ==========================================================================
+   5. Footer Oficial Nequi
+   ========================================================================== */
+.nequi-image-footer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 44px;
+  background-color: #ffffff;
+}
+
+.footer-wave-top {
+  width: 100%;
+  max-width: 480px;
+  line-height: 0;
+  display: block;
+}
+
+.footer-wave-svg {
+  display: block;
+  width: 100%;
+  height: 55px;
+}
+
+.footer-image-wrapper {
+  width: 100%;
+  max-width: 480px;
+  background-color: var(--nequi-purple);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -1px;
+}
+
+.footer-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+/* ==========================================================================
+   6. Modal de Simulación de Crédito Nequi
+   ========================================================================== */
+/* ==========================================================================
+   6. Modal de Simulación de Crédito Nequi (Alineación exacta a imagen)
+   ========================================================================== */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  box-sizing: border-box;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.modal-backdrop.open,
+.modal-backdrop.active {
+  display: flex;
+  opacity: 1;
+}
+
+.credit-summary-modal {
+  width: 100%;
+  max-width: 360px;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 0;
+  box-sizing: border-box;
+  max-height: 92vh;
+  overflow-y: auto;
+  transform: scale(0.95);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+  margin: auto;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.modal-backdrop.open .credit-summary-modal,
+.modal-backdrop.active .credit-summary-modal {
+  transform: scale(1);
+}
+
+.modal-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 20px 14px 20px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.modal-title-summary {
+  font-family: 'Manrope', sans-serif !important;
+  font-size: 18px;
+  font-weight: 600;
+  color: #200020;
+  margin: 0;
+  letter-spacing: -0.2px;
+}
+
+.modal-close-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #666666;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  transition: color 0.2s ease;
+}
+
+.modal-close-btn:hover {
+  color: #200020;
+}
+
+/* Cuerpo del Modal */
+.credit-summary-modal-body {
+  padding: 18px 18px 16px 18px;
+}
+
+/* Tarjeta Magenta de Monto */
+.credit-amount-card {
+  background: linear-gradient(135deg, #da0081 0%, #ab005c 100%);
+  border-radius: 12px;
+  padding: 20px 16px 18px 16px;
+  margin-bottom: 18px;
+  color: #ffffff;
+  text-align: center;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.amount-question {
+  font-family: 'Manrope', sans-serif !important;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.amount-display {
+  font-family: 'Manrope', sans-serif !important;
+  font-size: 36px;
+  font-weight: 700;
+  color: #ffffff;
+  display: block;
+  margin-bottom: 18px;
+  letter-spacing: -0.5px;
+  line-height: 1;
+}
+
+.slider-container {
+  width: 100%;
+  position: relative;
+  margin-top: 14px;
+}
+
+.nequi-range-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: linear-gradient(to right, #da0081 0%, #da0081 0%, #fff2f7 0%, #fff2f7 100%);
+  outline: none;
+  cursor: pointer;
+}
+
+.nequi-range-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #da0081;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(218, 0, 129, 0.4);
+  border: 3px solid #ffffff;
+}
+
+.nequi-range-slider::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #da0081;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(218, 0, 129, 0.4);
+  border: 3px solid #ffffff;
+}
+
+.slider-limits {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Manrope', sans-serif !important;
+  font-size: 12px;
+  color: #ffffff;
+  margin-top: 8px;
+  opacity: 0.8;
+  font-weight: 500;
+}
+
+/* Tarjeta de Información / Condiciones */
+.credit-conditions-card {
+  background: #f8f8f8;
+  border: none;
+  border-radius: 12px;
+  padding: 16px 16px 14px 16px;
+  margin-bottom: 16px;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.condition-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.condition-row:last-of-type {
+  border-bottom: none;
+}
+
+.condition-label {
+  font-family: 'Manrope', sans-serif !important;
+  font-size: 13px;
+  font-weight: 500;
+  color: #666666;
+}
+
+.condition-value {
+  font-family: 'Manrope', sans-serif !important;
+  font-size: 14px;
+  font-weight: 600;
+  color: #200020;
+}
+
+.condition-value-magenta {
+  font-family: 'Manrope', sans-serif !important;
+  font-size: 16px;
+  font-weight: 700;
+  color: #da0081;
+}
+
+.condition-divider {
+  display: none; /* el borde está en condition-row */
+}
+
+.condition-disclaimer {
+  font-family: 'Manrope', sans-serif !important;
+  font-size: 12px;
+  color: #999999;
+  margin-top: 12px;
+  margin-bottom: 0;
+  line-height: 1.4;
+  text-align: left;
+}
+
+/* Tarjeta de Autorización */
+.authorization-card {
+  background: #f5f5f5;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 0;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.custom-checkbox-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.checkbox-input {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  border: 2px solid #da0081;
+  border-radius: 4px;
+  background-color: #ffffff;
+  cursor: pointer;
+  flex-shrink: 0;
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.checkbox-input:checked {
+  background-color: #da0081;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 12px;
+}
+
+.auth-text {
+  font-family: 'Manrope', sans-serif !important;
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.5;
+}
+
+.auth-link {
+  font-family: 'Manrope', sans-serif !important;
+  color: #da0081;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.auth-link:hover {
+  text-decoration: underline;
+}
+
+/* Footer del Modal (Botón Confirmar) */
+.credit-summary-modal-footer {
+  padding: 16px 18px 18px 18px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.confirm-btn {
+  width: 100%;
+  background: #da0081;
+  color: #ffffff;
+  border: none;
+  padding: 14px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: 'Manrope', sans-serif !important;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  height: auto;
+  margin: 0;
+}
+
+.confirm-btn:disabled {
+  background-color: #e982be !important;
+  opacity: 1 !important;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* ==========================================================================
+   7. Compatibilidad con Pantalla de Validación
+   ========================================================================== */
+.form-group {
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.25);
+  border-radius: 8px;
+}
+
+.form-group input {
+  height: 50px;
+  width: 100%;
+  border: 0;
+  border-radius: 8px;
+  font-family: var(--font-main);
+  color: var(--nequi-purple);
+  background-color: #fff;
+  font-size: 16px;
+  padding: 24px 48px 6px 44px;
+  margin: 0 auto;
+  display: block;
+  outline: none;
+}
+
+.form-group img {
+  position: absolute;
+  width: 25px;
+  top: 13px;
+  left: 8px;
+}
+
+.form-group label {
+  position: absolute;
+  left: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: all 0.2s ease;
+  pointer-events: none;
+  color: var(--nequi-purple);
+  font-size: 16px;
+  font-family: var(--font-main);
+  font-weight: 400;
+  padding: 0 4px;
+}
+
+.form-group input:focus + label,
+.form-group input:valid + label {
+  top: 5px;
+  font-size: 13px;
+  color: var(--nequi-pink);
+  transform: none;
+}
+
+/* ==========================================================================
+   8. Banner Verde Preaprobado y Overlay de Carga Fullscreen
+   ========================================================================== */
+.loading-spinner-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999999;
+  font-family: 'Plus Jakarta Sans', 'Manrope', -apple-system, sans-serif;
+  overflow: hidden;
+}
+
+.loading-cubes-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 28px;
+  max-width: 320px;
+  width: 100%;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.nequi-loader {
+  width: 62px;
+  height: 62px;
+  position: relative;
+  display: block;
+  margin: 0 auto;
+}
+
+.cubes {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.cube {
+  background-color: #da0081;
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 5px;
+  -webkit-animation: sk-wanderingCube 1.8s ease-in-out infinite;
+  animation: sk-wanderingCube 1.8s ease-in-out infinite;
+}
+
+.cube:nth-child(2) {
+  -webkit-animation-delay: -0.9s;
+  animation-delay: -0.9s;
+}
+
+@keyframes sk-wanderingCube {
+  0% { transform: rotate(0deg); }
+  25% { transform: translateX(34px) rotate(-90deg) scale(0.5); }
+  50% { transform: translateX(34px) translateY(34px) rotate(-179deg); }
+  50.1% { transform: translateX(34px) translateY(34px) rotate(-180deg); }
+  75% { transform: translateX(0px) translateY(34px) rotate(-270deg) scale(0.5); }
+  100% { transform: rotate(-360deg); }
+}
+
+.loading-text {
+  font-family: 'Plus Jakarta Sans', 'Manrope', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: #200020;
+  line-height: 1.45;
+  margin: 0;
+  text-align: center;
+  letter-spacing: -0.15px;
+}
+
+.ready-card-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: popIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.cyan-ready-card {
+  width: 140px;
+  height: 140px;
+  background-color: #41d0e6;
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  box-shadow: 0 8px 24px rgba(65, 208, 230, 0.35);
+}
+
+.ready-check-icon {
+  width: 50px;
+  height: 50px;
+  display: block;
+}
+
+.ready-card-text {
+  font-family: 'Manrope', 'Plus Jakarta Sans', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: #200020;
+  letter-spacing: -0.2px;
+}
+
+/* Banner Verde Superior: Listo! Tu crédito se encuentra preaprobado. */
+.content {
+  position: fixed;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 24px);
+  max-width: 420px;
+  background: #0bbd67;
+  padding: 12px 16px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
+  opacity: 0;
+  transition: top 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+  z-index: 999999999;
+  color: #200020;
+  font-size: 13.5px;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  box-sizing: border-box;
+}
+
+.content.show {
+  top: 12px;
+  opacity: 1;
+}
+
+.content p {
+  margin: 0;
+  color: #200020;
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: -0.1px;
+}
+
+.check-container {
+  width: 26px;
+  height: 26px;
+  min-width: 26px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.35);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+.checkmark {
+  width: 10px;
+  height: 5px;
+  border-left: 2.5px solid #200020;
+  border-bottom: 2.5px solid #200020;
+  transform: rotate(-45deg);
+  margin-top: -2px;
+}
+
+/* ==========================================================================
+   ADAPTACIONES MÓVILES (LANDING & MODAL DE CRÉDITO)
+   ========================================================================== */
+@media (max-width: 480px) {
+  .header-container {
+    padding: 10px 16px;
+  }
+
+  .logo-text {
+    font-size: 24px;
+  }
+
+  .form-section {
+    padding: 0 14px;
+    margin-top: 18px;
+  }
+
+  .form-title {
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
+
+  .input-field-wrapper {
+    height: 56px;
+    padding: 0 14px;
+  }
+
+  .submit-btn {
+    min-height: 48px;
+    font-size: 16px;
+    touch-action: manipulation;
+  }
+
+  .form-disclaimer {
+    font-size: 12.5px;
+    margin-top: 10px;
+    margin-bottom: 18px;
+  }
+
+  /* Modal de resumen */
+  .modal-backdrop {
+    padding: 12px;
+  }
+
+  .credit-summary-modal {
+    max-width: 100%;
+    border-radius: 14px;
+    max-height: 92vh;
+  }
+
+  .modal-header-row {
+    padding: 14px 16px 12px 16px;
+  }
+
+  .modal-title-summary {
+    font-size: 16.5px;
+  }
+
+  .credit-summary-modal-body {
+    padding: 14px 16px;
+    gap: 12px;
+  }
+
+  .credit-amount-card {
+    padding: 14px;
+  }
+
+  .amount-display {
+    font-size: 28px !important;
+  }
+
+  .credit-conditions-card {
+    padding: 12px 14px;
+  }
+
+  .condition-row {
+    padding: 8px 0;
+  }
+
+  .confirm-btn {
+    min-height: 48px;
+    font-size: 15px;
+    touch-action: manipulation;
+  }
+
+  .content {
+    width: calc(100% - 20px);
+    padding: 10px 14px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 360px) {
+  .form-title {
+    font-size: 18px;
+  }
+
+  .amount-display {
+    font-size: 25px !important;
+  }
+
+  .condition-label,
+  .condition-value {
+    font-size: 12.5px;
+  }
+}
+

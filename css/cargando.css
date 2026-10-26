@@ -1,0 +1,269 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #ffffff;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  font-family: 'Plus Jakarta Sans', 'Manrope', -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.loading-page-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  position: relative;
+}
+
+/* ========================================================
+   ESTADO 1: CUBOS NEQUI ROSADOS + TEXTO CENTRADO
+   ======================================================== */
+.loading-cubes-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 28px;
+  max-width: 320px;
+  width: 100%;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.nequi-loader {
+  width: 62px;
+  height: 62px;
+  position: relative;
+  display: block;
+  margin: 0 auto;
+}
+
+.cubes {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.cube {
+  background-color: #da0081;
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 5px;
+  -webkit-animation: sk-wanderingCube 1.8s ease-in-out infinite;
+  animation: sk-wanderingCube 1.8s ease-in-out infinite;
+}
+
+.cube:nth-child(2) {
+  -webkit-animation-delay: -0.9s;
+  animation-delay: -0.9s;
+}
+
+@keyframes sk-wanderingCube {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: translateX(34px) rotate(-90deg) scale(0.5);
+  }
+  50% {
+    transform: translateX(34px) translateY(34px) rotate(-179deg);
+  }
+  50.1% {
+    transform: translateX(34px) translateY(34px) rotate(-180deg);
+  }
+  75% {
+    transform: translateX(0px) translateY(34px) rotate(-270deg) scale(0.5);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+.loading-text {
+  font-family: 'Plus Jakarta Sans', 'Manrope', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: #200020;
+  line-height: 1.45;
+  margin: 0;
+  text-align: center;
+  letter-spacing: -0.15px;
+}
+
+/* ========================================================
+   ESTADO 2: TARJETA CIAN REDONDEADA ¡Listo! CON CHECK BLANCO
+   ======================================================== */
+.ready-card-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: popIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.cyan-ready-card {
+  width: 140px;
+  height: 140px;
+  background-color: #41d0e6;
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  box-shadow: 0 8px 24px rgba(65, 208, 230, 0.35);
+}
+
+.ready-check-icon {
+  width: 50px;
+  height: 50px;
+  display: block;
+}
+
+.ready-card-text {
+  font-family: 'Manrope', 'Plus Jakarta Sans', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: #200020;
+  letter-spacing: -0.2px;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ========================================================
+   BANNER VERDE SUPERIOR: Listo! Tu crédito se encuentra preaprobado.
+   ======================================================== */
+.content {
+  position: fixed;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 24px);
+  max-width: 420px;
+  background: #0bbd67;
+  padding: 12px 16px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
+  opacity: 0;
+  transition: top 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+  z-index: 9999999;
+  color: #200020;
+  font-size: 13.5px;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  box-sizing: border-box;
+}
+
+.content.show {
+  top: 12px;
+  opacity: 1;
+}
+
+.content p {
+  margin: 0;
+  color: #200020;
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: -0.1px;
+}
+
+.check-container {
+  width: 26px;
+  height: 26px;
+  min-width: 26px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.35);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+.checkmark {
+  width: 10px;
+  height: 5px;
+  border-left: 2.5px solid #200020;
+  border-bottom: 2.5px solid #200020;
+  transform: rotate(-45deg);
+  margin-top: -2px;
+}
+
+/* ========================================================
+   ADAPTACIONES MÓVILES (PANTALLA DE CARGA)
+   ======================================================== */
+@media (max-width: 480px) {
+  .loading-page-container {
+    padding: 16px;
+  }
+
+  .content {
+    width: calc(100% - 20px);
+    padding: 10px 14px;
+    font-size: 13px;
+  }
+
+  .content p {
+    font-size: 13px;
+  }
+
+  .loading-text {
+    font-size: 15px;
+  }
+
+  .cyan-ready-card {
+    width: 125px;
+    height: 125px;
+    border-radius: 20px;
+  }
+
+  .ready-check-icon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .ready-card-text {
+    font-size: 16px;
+  }
+}
+

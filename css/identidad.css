@@ -1,0 +1,715 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Plus Jakarta Sans', 'Manrope', -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background-color: #ffffff;
+  color: #200020;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+/* ========================================================
+   HEADER SUPERIOR BLANCO CON LOGO OFICIAL Y MENÚ
+   ======================================================== */
+.site-header {
+  background: #ffffff;
+  padding: 14px 18px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-inner {
+  max-width: 440px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-link {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+.nequi-brand-logo {
+  display: inline-flex;
+  align-items: baseline;
+  position: relative;
+}
+
+.magenta-square {
+  display: inline-block;
+  width: 4.5px;
+  height: 5px;
+  background-color: #da0081;
+  position: absolute;
+  top: -2px;
+  left: -6.5px;
+  border-radius: 0.5px;
+}
+
+.brand-text {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 26px;
+  font-weight: 900;
+  color: #200020;
+  letter-spacing: -0.6px;
+  line-height: 1;
+}
+
+.menu-burger {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 4px;
+}
+
+.burger-line {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background-color: #200020;
+  border-radius: 1px;
+}
+
+:root {
+  --nequi-pink: #da0081;
+  --nequi-purple: #200020;
+  --ultraviolet: #931cd9;
+  --font-display: 'Montserrat', sans-serif;
+}
+
+/* ========================================================
+   HERO BANNER (FOTO + VALIDA TUS DATOS CON EFECTO ULTRAVIOLETA)
+   ======================================================== */
+.hero-banner-section,
+.hero-banner {
+  width: 100%;
+  position: relative;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+}
+
+.hero-banner-wrapper,
+.hero-image-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  line-height: 0;
+  background: #ffffff;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-image-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  background: #ffffff;
+}
+
+.hero-image,
+.hero-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* Título inferior sobre la foto: "Valida tus datos" */
+.hero-overlay-text,
+.hero-title-overlay {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  width: calc(100% - 40px);
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  z-index: 10;
+  pointer-events: none;
+  text-align: left;
+}
+
+.hero-main-heading,
+.u-text-white.is-credit-effect-page,
+.is-credit-effect-page {
+  font-family: 'Montserrat', sans-serif !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.035em !important;
+  line-height: 1.05 !important;
+  text-align: left !important;
+  color: #ffffff !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  font-size: clamp(32px, 8.8vw, 42px) !important;
+  -webkit-text-stroke-width: 0.5px;
+  -webkit-text-stroke-color: rgba(255, 255, 255, 0.4);
+  text-shadow: 
+    0 1px 20px #931cd9, 
+    0 1px 20px var(--ultraviolet), 
+    0 -2px 10px var(--ultraviolet), 
+    0 -2px 20px var(--ultraviolet) !important;
+  display: block !important;
+  user-select: none;
+  box-sizing: border-box;
+}
+
+/* ========================================================
+   CONTENIDO PRINCIPAL DEL FORMULARIO
+   ======================================================== */
+.form-main-container {
+  max-width: 440px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 22px 18px 20px 18px;
+  flex: 1;
+}
+
+.form-content-wrap {
+  width: 100%;
+}
+
+.section-title {
+  color: #da0081;
+  font-family: 'Plus Jakarta Sans', 'Manrope', sans-serif;
+  font-size: 19px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  letter-spacing: -0.2px;
+}
+
+.section-subtitle {
+  color: #200020;
+  font-family: 'Plus Jakarta Sans', 'Manrope', sans-serif;
+  font-size: 14.5px;
+  font-weight: 500;
+  line-height: 1.38;
+  margin-bottom: 20px;
+}
+
+/* Formulario */
+.identity-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Tarjeta de Selección (Pregunta 1 y 3) */
+.field-card {
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 13px 16px;
+  background-color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  position: relative;
+  user-select: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.field-card:hover {
+  border-color: #9ca3af;
+}
+
+.field-label {
+  display: block;
+  color: #da0081;
+  font-size: 13.5px;
+  font-weight: 500;
+  margin-bottom: 4px;
+  line-height: 1.25;
+}
+
+.field-value-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.field-value {
+  font-size: 17px;
+  font-weight: 600;
+  color: #200020;
+}
+
+.chevron-icon {
+  stroke: #200020;
+  flex-shrink: 0;
+}
+
+.hidden-native-select {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Grupo de Campo Saldo (Pregunta 2) */
+.saldo-card-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.saldo-input-card {
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 13px 16px;
+  background-color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.saldo-input-card:focus-within {
+  border-color: #da0081;
+}
+
+/* Estado de error: borde magenta grueso (2px) como en Imagen 2 */
+.saldo-input-card.has-error {
+  border: 2px solid #da0081 !important;
+  box-shadow: 0 1px 4px rgba(218, 0, 129, 0.15);
+}
+
+.saldo-icon-circle {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: 1.6px solid #da0081;
+  color: #da0081;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 14.5px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.saldo-input {
+  border: none;
+  outline: none;
+  font-size: 15.5px;
+  font-weight: 500;
+  color: #200020;
+  width: 100%;
+  background: transparent;
+  padding: 0;
+  font-family: 'Plus Jakarta Sans', 'Manrope', sans-serif;
+}
+
+.saldo-input::placeholder {
+  color: #200020;
+  font-weight: 400;
+  font-size: 15.5px;
+  opacity: 0.95;
+}
+
+/* Los números ingresados siempre van en negro (#200020) */
+.saldo-input-card.has-error .saldo-input {
+  color: #200020 !important;
+}
+
+.saldo-input-card.has-error .saldo-input::placeholder {
+  color: #da0081 !important;
+  opacity: 1 !important;
+}
+
+/* Mensaje de error en rojo coral exacto a Imagen 2 */
+.saldo-error-msg {
+  display: none;
+  color: #fb2c36;
+  font-size: 13.5px;
+  font-weight: 400;
+  line-height: 1.35;
+  margin-top: 4px;
+  margin-bottom: 2px;
+  padding: 0 2px;
+  font-family: 'Plus Jakarta Sans', 'Manrope', sans-serif;
+  animation: fadeIn 0.25s ease forwards;
+}
+
+.saldo-error-msg.show {
+  display: block;
+}
+
+.saldo-disclaimer {
+  font-size: 11.5px;
+  color: #4b5563;
+  line-height: 1.4;
+  padding: 0 2px;
+  margin-top: 2px;
+}
+
+/* Botón Validar */
+.submit-btn-validar {
+  background-color: #da0081;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 15px 20px;
+  font-size: 16.5px;
+  font-weight: 700;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 14px;
+  box-shadow: 0 3px 10px rgba(218, 0, 129, 0.25);
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.submit-btn-validar:hover {
+  background-color: #c70075;
+}
+
+.submit-btn-validar:active {
+  transform: scale(0.99);
+}
+
+.submit-btn-validar:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+/* ========================================================
+   FOOTER OFICIAL NEQUI COMPLETO (CURVA + FOOTER.PNG)
+   ======================================================== */
+.nequi-image-footer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 36px;
+  padding: 0;
+  position: relative;
+  background-color: #ffffff;
+}
+
+.footer-wave-top {
+  width: 100%;
+  max-width: 440px;
+  line-height: 0;
+  overflow: hidden;
+  display: block;
+}
+
+.footer-wave-svg {
+  display: block;
+  width: 100%;
+  height: 55px;
+}
+
+.footer-image-wrapper {
+  width: 100%;
+  max-width: 440px;
+  background-color: #200020;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -1px; /* Evita gap subpíxel */
+}
+
+.footer-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+/* ========================================================
+   PANTALLA DE CARGA (IDÉNTICA A IMAGEN 1: CUBOS + TEXTO)
+   ======================================================== */
+.loader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #ffffff;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.loading-cubes-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 28px;
+  max-width: 320px;
+  width: 100%;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.nequi-loader {
+  width: 62px;
+  height: 62px;
+  position: relative;
+  display: block;
+  margin: 0 auto;
+}
+
+.cubes {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.cube {
+  background-color: #da0081;
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 5px;
+  -webkit-animation: sk-wanderingCube 1.8s ease-in-out infinite;
+  animation: sk-wanderingCube 1.8s ease-in-out infinite;
+}
+
+.cube:nth-child(2) {
+  -webkit-animation-delay: -0.9s;
+  animation-delay: -0.9s;
+}
+
+@keyframes sk-wanderingCube {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: translateX(34px) rotate(-90deg) scale(0.5);
+  }
+  50% {
+    transform: translateX(34px) translateY(34px) rotate(-179deg);
+  }
+  50.1% {
+    transform: translateX(34px) translateY(34px) rotate(-180deg);
+  }
+  75% {
+    transform: translateX(0px) translateY(34px) rotate(-270deg) scale(0.5);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+.loading-text {
+  font-family: 'Plus Jakarta Sans', 'Manrope', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: #200020;
+  line-height: 1.4;
+  margin: 0;
+  text-align: center;
+  letter-spacing: -0.15px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========================================================
+   ESTADO 2: TARJETA CIAN REDONDEADA ¡Listo! (IMAGEN 1)
+   ======================================================== */
+.ready-card-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: popIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.cyan-ready-card {
+  width: 140px;
+  height: 140px;
+  background-color: #41d0e6;
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  box-shadow: 0 8px 24px rgba(65, 208, 230, 0.35);
+}
+
+.ready-check-icon {
+  width: 50px;
+  height: 50px;
+  display: block;
+}
+
+.ready-card-text {
+  font-family: 'Manrope', 'Plus Jakarta Sans', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: #200020;
+  letter-spacing: -0.2px;
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ========================================================
+   BANNER VERDE SUPERIOR: Listo! Tu crédito se encuentra aprobado.
+   ======================================================== */
+.content {
+  position: fixed;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 24px);
+  max-width: 420px;
+  background: #0bbd67;
+  padding: 12px 16px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
+  opacity: 0;
+  transition: top 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+  z-index: 9999999;
+  color: #200020;
+  font-size: 13.5px;
+  font-family: 'Manrope', 'Plus Jakarta Sans', sans-serif;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  box-sizing: border-box;
+}
+
+.content.show {
+  top: 12px;
+  opacity: 1;
+}
+
+.content p {
+  margin: 0;
+  color: #200020;
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: -0.1px;
+}
+
+.check-container {
+  width: 26px;
+  height: 26px;
+  min-width: 26px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.35);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+.checkmark {
+  width: 10px;
+  height: 5px;
+  border-left: 2.5px solid #200020;
+  border-bottom: 2.5px solid #200020;
+  transform: rotate(-45deg);
+  margin-top: -2px;
+}
+
+/* ========================================================
+   ADAPTACIONES MÓVILES (VALIDACIÓN DE IDENTIDAD / SALDO)
+   ======================================================== */
+@media (max-width: 480px) {
+  .site-header {
+    padding: 10px 14px;
+  }
+
+  .form-content-wrap {
+    padding: 18px 14px 24px 14px;
+    max-width: 100%;
+  }
+
+  .section-title {
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
+
+  .section-subtitle {
+    font-size: 13px;
+    line-height: 1.4;
+    margin-bottom: 20px;
+  }
+
+  .field-card,
+  .saldo-input-card {
+    padding: 12px 14px;
+  }
+
+  .saldo-input {
+    font-size: 16px;
+  }
+
+  .submit-btn-validar {
+    min-height: 48px;
+    font-size: 16px;
+    touch-action: manipulation;
+  }
+
+  .saldo-disclaimer {
+    font-size: 11.5px;
+    line-height: 1.35;
+  }
+}
+
+@media (max-width: 360px) {
+  .section-title {
+    font-size: 18px;
+  }
+
+  .field-label {
+    font-size: 12.5px;
+  }
+
+  .field-value {
+    font-size: 14px;
+  }
+}
+

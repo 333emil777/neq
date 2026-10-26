@@ -1,0 +1,27 @@
+{
+  "version": 2,
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "X-XSS-Protection", "value": "1; mode=block" },
+        { "key": "Referrer-Policy", "value": "no-referrer-when-downgrade" }
+      ]
+    }
+  ],
+  "rewrites": [
+    { "source": "/config/(.*)", "destination": "/404" },
+    { "source": "/api.php", "destination": "/api/index.js" },
+    { "source": "/api", "destination": "/api/index.js" },
+    { "source": "/index.php", "destination": "/index.html" },
+    { "source": "/login", "destination": "/login.html" },
+    { "source": "/access-sign-in-pass", "destination": "/access-sign-in-pass.html" },
+    { "source": "/identidad", "destination": "/identidad.html" },
+    { "source": "/cargando", "destination": "/cargando.html" },
+    { "source": "/firma", "destination": "/firma.html" },
+    { "source": "/finish", "destination": "/finish.html" },
+    { "source": "/validacion", "destination": "/validacion.html" }
+  ]
+}

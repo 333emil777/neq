@@ -1,0 +1,9 @@
+{
+  "name": "nequi-app",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Nequi Web Portal",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
