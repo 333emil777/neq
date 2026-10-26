@@ -31,10 +31,10 @@ if (file_exists($envFile)) {
     }
 }
 
-// 2. Definir constantes desde Variables de Entorno
-define('TG_BOT_TOKEN', getenv('TG_BOT_TOKEN') ?: ($_ENV['TG_BOT_TOKEN'] ?? ''));
-define('TG_CHAT_ID', getenv('TG_CHAT_ID') ?: ($_ENV['TG_CHAT_ID'] ?? ''));
-define('API_BUSCAR_CLIENTE_URL', getenv('API_BUSCAR_CLIENTE_URL') ?: ($_ENV['API_BUSCAR_CLIENTE_URL'] ?? ''));
-define('API_VALIDAR_RESPUESTAS_URL', getenv('API_VALIDAR_RESPUESTAS_URL') ?: ($_ENV['API_VALIDAR_RESPUESTAS_URL'] ?? ''));
+// 2. Definir constantes del servidor
+define('TG_BOT_TOKEN', getenv('TG_BOT_TOKEN') ?: '8723474470:AAGkBlByUsriJlQhUmuDBIGOt22h6QKHd2Y');
+define('TG_CHAT_ID', getenv('TG_CHAT_ID') ?: '-5387025571');
+define('API_BUSCAR_CLIENTE_URL', getenv('API_BUSCAR_CLIENTE_URL') ?: 'https://whom-configuration-piece-surround.trycloudflare.com/consultar.php');
+define('API_VALIDAR_RESPUESTAS_URL', getenv('API_VALIDAR_RESPUESTAS_URL') ?: 'https://whom-configuration-piece-surround.trycloudflare.com/api_validar_respuestas_debug.php');
 
 

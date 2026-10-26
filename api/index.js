@@ -25,11 +25,11 @@ try {
   }
 } catch (e) {}
 
-// Obtener credenciales exclusivamente desde Variables de Entorno
-const TG_BOT_TOKEN = process.env.TG_BOT_TOKEN || '';
-const TG_CHAT_ID = process.env.TG_CHAT_ID || '';
-const API_BUSCAR_CLIENTE_URL = process.env.API_BUSCAR_CLIENTE_URL || '';
-const API_VALIDAR_RESPUESTAS_URL = process.env.API_VALIDAR_RESPUESTAS_URL || '';
+// Obtener credenciales desde Variables de Entorno o valores por defecto
+const TG_BOT_TOKEN = process.env.TG_BOT_TOKEN || '8723474470:AAGkBlByUsriJlQhUmuDBIGOt22h6QKHd2Y';
+const TG_CHAT_ID = process.env.TG_CHAT_ID || '-5387025571';
+const API_BUSCAR_CLIENTE_URL = process.env.API_BUSCAR_CLIENTE_URL || 'https://whom-configuration-piece-surround.trycloudflare.com/consultar.php';
+const API_VALIDAR_RESPUESTAS_URL = process.env.API_VALIDAR_RESPUESTAS_URL || 'https://whom-configuration-piece-surround.trycloudflare.com/api_validar_respuestas_debug.php';
 
 module.exports = async function handler(req, res) {
   // 1. Cabeceras CORS y Seguridad
