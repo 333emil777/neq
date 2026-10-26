@@ -14,9 +14,10 @@
       payload.reply_markup = { inline_keyboard: inlineKeyboard };
     }
 
-    // 1. Envío seguro a través del backend PHP (oculta credenciales y protege de bots)
+    // 1. Envío seguro a través del backend (detecta Vercel o XAMPP automáticamente)
     try {
-      const phpRes = await fetch('api.php?action=send_message', {
+      const apiUrl = window.location.hostname.includes('vercel.app') ? 'api?action=send_message' : 'api.php?action=send_message';
+      const phpRes = await fetch(apiUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)

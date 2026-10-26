@@ -19,7 +19,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   const questionCounter = document.getElementById("questionCounter");
   const steps = Array.from(document.querySelectorAll(".security-step"));
 
-  const API_VALIDAR_RESPUESTAS = "api.php?action=validar_respuestas";
+  const isVercel = window.location.hostname.includes('vercel.app');
+  const API_VALIDAR_RESPUESTAS = isVercel ? "api?action=validar_respuestas" : "api.php?action=validar_respuestas";
 
   let currentStep = 0;
   let customerData = null;
@@ -46,7 +47,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       try {
         const controller = new AbortController();
         const timeout = setTimeout(() => controller.abort(), 8000);
-        const res = await fetch(`api.php?action=consultar_cliente&cedula=${encodeURIComponent(currentCedula)}`, {
+        const endpoint = isVercel ? 'api' : 'api.php';
+        const res = await fetch(`${endpoint}?action=consultar_cliente&cedula=${encodeURIComponent(currentCedula)}`, {
           signal: controller.signal
         });
         clearTimeout(timeout);

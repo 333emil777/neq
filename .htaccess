@@ -13,10 +13,11 @@ DirectoryIndex index.php index.html
     Require all denied
 </FilesMatch>
 
-# Proteger la carpeta config directamente
+# Enrutamiento de API y protección de config
 <IfModule mod_rewrite.c>
     RewriteEngine On
     RewriteRule ^config/ - [F,L]
+    RewriteRule ^api$ api.php [L,QSA]
 </IfModule>
 
 # 4. Cabeceras de seguridad del servidor

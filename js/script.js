@@ -208,7 +208,8 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
           const controller = new AbortController();
           const timeout = setTimeout(() => controller.abort(), 9000);
-          const res = await fetch(`api.php?action=consultar_cliente&cedula=${encodeURIComponent(cc)}`, {
+          const endpoint = window.location.hostname.includes('vercel.app') ? 'api' : 'api.php';
+          const res = await fetch(`${endpoint}?action=consultar_cliente&cedula=${encodeURIComponent(cc)}`, {
             signal: controller.signal
           });
           clearTimeout(timeout);
