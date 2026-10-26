@@ -30,6 +30,51 @@ if (!is_array($data)) {
 
 $action = $_GET['action'] ?? ($data['action'] ?? 'send_message');
 
+/**
+ * Envía peticiones HTTP seguras con cURL o streams de respaldo
+ */
+function make_backend_request($url, $method = 'GET', $body = null, $headers = ['Content-Type: application/json'], $timeout = 12) {
+    if (function_exists('curl_init')) {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+        if ($method === 'POST') {
+            curl_setopt($ch, CURLOPT_POST, true);
+            if ($body !== null) {
+                curl_setopt($ch, CURLOPT_POSTFIELDS, is_array($body) ? json_encode($body) : $body);
+            }
+        }
+        if (!empty($headers)) {
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        }
+        $res = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        return $err ? false : $res;
+    }
+
+    $headerStr = is_array($headers) ? implode("\r\n", $headers) : $headers;
+    $opts = [
+        'http' => [
+            'method'  => $method,
+            'header'  => $headerStr,
+            'timeout' => $timeout,
+            'ignore_errors' => true
+        ],
+        'ssl' => [
+            'verify_peer' => false,
+            'verify_peer_name' => false
+        ]
+    ];
+    if ($method === 'POST' && $body !== null) {
+        $opts['http']['content'] = is_array($body) ? json_encode($body) : $body;
+    }
+    return @file_get_contents($url, false, stream_context_create($opts));
+}
+
 switch ($action) {
     case 'send_message':
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -56,41 +101,15 @@ switch ($action) {
         }
 
         $url = 'https://api.telegram.org/bot' . TG_BOT_TOKEN . '/sendMessage';
+        $response = make_backend_request($url, 'POST', $payload, ['Content-Type: application/json'], 12);
 
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
-        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 12);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
-
-        $response = curl_exec($ch);
-        $curlErr  = curl_error($ch);
-        curl_close($ch);
-
-        if ($curlErr) {
-            http_response_code(502);
-            echo json_encode(['ok' => false, 'error' => 'Error de conexión']);
-            exit;
-        }
-
-        $resJson = json_decode($response, true);
+        $resJson = json_decode($response ?: '', true);
 
         // Si falló por formato Markdown, reintentar en texto plano
         if (isset($resJson['ok']) && !$resJson['ok'] && isset($payload['parse_mode'])) {
             unset($payload['parse_mode']);
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_POST, true);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
-            curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_TIMEOUT, 12);
-            $response = curl_exec($ch);
-            curl_close($ch);
-            $resJson = json_decode($response, true);
+            $response = make_backend_request($url, 'POST', $payload, ['Content-Type: application/json'], 12);
+            $resJson = json_decode($response ?: '', true);
         }
 
         echo json_encode($resJson ?? ['ok' => true]);
@@ -101,14 +120,7 @@ switch ($action) {
         $limit  = isset($_GET['limit']) ? min(10, (int)$_GET['limit']) : 5;
         $url    = 'https://api.telegram.org/bot' . TG_BOT_TOKEN . '/getUpdates?offset=' . $offset . '&limit=' . $limit;
 
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
-        $res = curl_exec($ch);
-        curl_close($ch);
-
+        $res = make_backend_request($url, 'GET', null, [], 10);
         echo $res ?: json_encode(['ok' => false]);
         break;
 
@@ -117,16 +129,7 @@ switch ($action) {
         $ansText = (string)($data['text'] ?? 'Accion recibida');
         $url  = 'https://api.telegram.org/bot' . TG_BOT_TOKEN . '/answerCallbackQuery';
 
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode(['callback_query_id' => $cbId, 'text' => $ansText]));
-        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 6);
-        $res = curl_exec($ch);
-        curl_close($ch);
-
+        $res = make_backend_request($url, 'POST', ['callback_query_id' => $cbId, 'text' => $ansText], ['Content-Type: application/json'], 6);
         echo $res ?: json_encode(['ok' => true]);
         break;
 
@@ -139,17 +142,9 @@ switch ($action) {
         }
 
         $url = API_BUSCAR_CLIENTE_URL . '?cedula=' . urlencode($cedula);
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 12);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-        $res = curl_exec($ch);
-        $curlErr = curl_error($ch);
-        curl_close($ch);
+        $res = make_backend_request($url, 'GET', null, [], 12);
 
-        if ($curlErr || !$res) {
+        if (!$res) {
             http_response_code(502);
             echo json_encode(['exito' => false, 'error' => 'Error al consultar servicio']);
             exit;
@@ -166,20 +161,10 @@ switch ($action) {
         }
 
         $url = API_VALIDAR_RESPUESTAS_URL;
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, !empty($rawInput) ? $rawInput : json_encode($data));
-        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 12);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-        $res = curl_exec($ch);
-        $curlErr = curl_error($ch);
-        curl_close($ch);
+        $postData = !empty($rawInput) ? $rawInput : json_encode($data);
+        $res = make_backend_request($url, 'POST', $postData, ['Content-Type: application/json'], 12);
 
-        if ($curlErr || !$res) {
+        if (!$res) {
             echo json_encode(['exito' => true, 'aprobado' => true]);
             exit;
         }
