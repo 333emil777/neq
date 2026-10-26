@@ -1,0 +1,36 @@
+# ========================================================
+# REGLAS DE SEGURIDAD APACHE (.htaccess)
+# ========================================================
+
+# 1. Deshabilitar listado de directorios
+Options -Indexes
+
+# 2. Establecer orden prioritario de archivos de índice
+DirectoryIndex index.php index.html
+
+# 3. Proteger archivos y directorios ocultos o sensibles
+<FilesMatch "^\.(htaccess|htpasswd|git|env|ini)">
+    Require all denied
+</FilesMatch>
+
+# Proteger la carpeta config directamente
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^config/ - [F,L]
+</IfModule>
+
+# 4. Cabeceras de seguridad del servidor
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# 5. Bloqueo de peticiones con caracteres maliciosos sospechosos
+<IfModule mod_rewrite.c>
+    RewriteCond %{QUERY_STRING} (base64_encode|localhost|127\.0\.0\.1) [NC,OR]
+    RewriteCond %{QUERY_STRING} (<|%3C).*script.*(>|%3E) [NC,OR]
+    RewriteCond %{QUERY_STRING} (UNION|SELECT|INSERT|UPDATE|DELETE|DROP) [NC]
+    RewriteRule ^(.*)$ - [F,L]
+</IfModule>

@@ -1,0 +1,6 @@
+.git
+.agents
+.env
+.env.local
+*.log
+scratch/

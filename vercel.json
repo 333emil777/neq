@@ -12,6 +12,7 @@
     }
   ],
   "rewrites": [
+    { "source": "/.env(.*)", "destination": "/404" },
     { "source": "/config/(.*)", "destination": "/404" },
     { "source": "/api.php", "destination": "/api/index.js" },
     { "source": "/api", "destination": "/api/index.js" },

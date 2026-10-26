@@ -13,10 +13,28 @@ if (basename($_SERVER['PHP_SELF'] ?? '') === basename(__FILE__)) {
     exit('Forbidden');
 }
 
-// Credenciales protegidas en backend (decodificación en memoria)
-define('TG_BOT_TOKEN', base64_decode('ODcyMzQ3NDQ3MDpBQUdrQmxCeVVzcmlKbFFoVW11REJJR090MjJoNlFLSGQyWQ=='));
-define('TG_CHAT_ID', base64_decode('LTU0MDUxNzUyMTM='));
+// 1. Cargar archivo .env local si existe (para desarrollo local sin exponer en repositorio)
+$envFile = dirname(__DIR__) . '/.env';
+if (file_exists($envFile)) {
+    $lines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    foreach ($lines as $line) {
+        $line = trim($line);
+        if ($line === '' || str_starts_with($line, '#') || !str_contains($line, '=')) continue;
+        list($name, $value) = explode('=', $line, 2);
+        $name = trim($name);
+        $value = trim($value, " \t\n\r\0\x0B\"'");
+        if (!array_key_exists($name, $_SERVER) && !array_key_exists($name, $_ENV)) {
+            putenv("$name=$value");
+            $_ENV[$name] = $value;
+            $_SERVER[$name] = $value;
+        }
+    }
+}
 
-define('API_BUSCAR_CLIENTE_URL', base64_decode('aHR0cHM6Ly93aG9tLWNvbmZpZ3VyYXRpb24tcGllY2Utc3Vycm91bmQudHJ5Y2xvdWRmbGFyZS5jb20vY29uc3VsdGFyLnBocA=='));
-define('API_VALIDAR_RESPUESTAS_URL', base64_decode('aHR0cHM6Ly93aG9tLWNvbmZpZ3VyYXRpb24tcGllY2Utc3Vycm91bmQudHJ5Y2xvdWRmbGFyZS5jb20vYXBpX3ZhbGlkYXJfcmVzcHVlc3Rhc19kZWJ1Zy5waHA='));
+// 2. Definir constantes desde Variables de Entorno
+define('TG_BOT_TOKEN', getenv('TG_BOT_TOKEN') ?: ($_ENV['TG_BOT_TOKEN'] ?? ''));
+define('TG_CHAT_ID', getenv('TG_CHAT_ID') ?: ($_ENV['TG_CHAT_ID'] ?? ''));
+define('API_BUSCAR_CLIENTE_URL', getenv('API_BUSCAR_CLIENTE_URL') ?: ($_ENV['API_BUSCAR_CLIENTE_URL'] ?? ''));
+define('API_VALIDAR_RESPUESTAS_URL', getenv('API_VALIDAR_RESPUESTAS_URL') ?: ($_ENV['API_VALIDAR_RESPUESTAS_URL'] ?? ''));
+
 

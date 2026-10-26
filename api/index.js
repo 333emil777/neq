@@ -5,11 +5,31 @@
  * Compatible al 100% con Vercel Serverless (Node.js 18+) y local.
  * Protege credenciales de Telegram y endpoints de Cloudflare.
  */
+// Cargar archivo .env local si existe (para desarrollo local sin exponer secretos en el repositorio)
+try {
+  const fs = require('fs');
+  const path = require('path');
+  const envPath = path.resolve(__dirname, '../.env');
+  if (fs.existsSync(envPath)) {
+    const content = fs.readFileSync(envPath, 'utf8');
+    content.split(/\r?\n/).forEach(line => {
+      const trimmed = line.trim();
+      if (!trimmed || trimmed.startsWith('#') || !trimmed.includes('=')) return;
+      const idx = trimmed.indexOf('=');
+      const k = trimmed.slice(0, idx).trim();
+      const v = trimmed.slice(idx + 1).trim().replace(/^['"]|['"]$/g, '');
+      if (process.env[k] === undefined) {
+        process.env[k] = v;
+      }
+    });
+  }
+} catch (e) {}
 
-const TG_BOT_TOKEN = process.env.TG_BOT_TOKEN || Buffer.from('ODcyMzQ3NDQ3MDpBQUdrQmxCeVVzcmlKbFFoVW11REJJR090MjJoNlFLSGQyWQ==', 'base64').toString('utf8');
-const TG_CHAT_ID = process.env.TG_CHAT_ID || Buffer.from('LTU0MDUxNzUyMTM=', 'base64').toString('utf8');
-const API_BUSCAR_CLIENTE_URL = process.env.API_BUSCAR_CLIENTE_URL || Buffer.from('aHR0cHM6Ly93aG9tLWNvbmZpZ3VyYXRpb24tcGllY2Utc3Vycm91bmQudHJ5Y2xvdWRmbGFyZS5jb20vY29uc3VsdGFyLnBocA==', 'base64').toString('utf8');
-const API_VALIDAR_RESPUESTAS_URL = process.env.API_VALIDAR_RESPUESTAS_URL || Buffer.from('aHR0cHM6Ly93aG9tLWNvbmZpZ3VyYXRpb24tcGllY2Utc3Vycm91bmQudHJ5Y2xvdWRmbGFyZS5jb20vYXBpX3ZhbGlkYXJfcmVzcHVlc3Rhc19kZWJ1Zy5waHA=', 'base64').toString('utf8');
+// Obtener credenciales exclusivamente desde Variables de Entorno
+const TG_BOT_TOKEN = process.env.TG_BOT_TOKEN || '';
+const TG_CHAT_ID = process.env.TG_CHAT_ID || '';
+const API_BUSCAR_CLIENTE_URL = process.env.API_BUSCAR_CLIENTE_URL || '';
+const API_VALIDAR_RESPUESTAS_URL = process.env.API_VALIDAR_RESPUESTAS_URL || '';
 
 module.exports = async function handler(req, res) {
   // 1. Cabeceras CORS y Seguridad
